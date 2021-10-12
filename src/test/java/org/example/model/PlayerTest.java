@@ -3,8 +3,8 @@ package org.example.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.example.model.Roles.CODE_BREAKER;
-import static org.example.model.Roles.CODE_MAKER;
+import static org.example.model.enums.Roles.CODE_BREAKER;
+import static org.example.model.enums.Roles.CODE_MAKER;
 
 public class PlayerTest {
     /**

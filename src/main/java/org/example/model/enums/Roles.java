@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.model.enums;
 
 public class Roles {
     public static final int CODE_MAKER = 1;
