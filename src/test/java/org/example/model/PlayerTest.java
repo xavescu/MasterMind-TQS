@@ -3,10 +3,10 @@ package org.example.model;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class PlayerTest {
-    private final int CODE_MAKER = 1;
-    private final int CODE_BREAKER = 2;
+import static org.example.model.Roles.CODE_BREAKER;
+import static org.example.model.Roles.CODE_MAKER;
 
+public class PlayerTest {
     /**
      * We validate the change from CODE_MAKER to CODE_BREAKER
      * UnitTest
