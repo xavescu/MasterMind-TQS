@@ -6,6 +6,7 @@ import org.example.view.GameView;
 public class GameController {
     private GameModel model = new GameModel();
     private GameView view = new GameView();
+    private int turn = 0;
 
     public boolean isPlaying(){
         return true;
