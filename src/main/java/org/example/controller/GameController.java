@@ -17,7 +17,7 @@ public class GameController {
         return true;
     }
 
-    private void updateView(){
-
+    public int listenKeyBoard(){
+        return 0;
     }
 }
