@@ -11,6 +11,8 @@ public class App
         GameView view = new GameView();
         GameModel model = new GameModel();
         GameController controller = new GameController(view, model);
+        int turn = 0;
+        int cursor = 0;
 
         // Game loop
         while(controller.isPlaying()){
@@ -39,7 +41,6 @@ public class App
                 //Update View
                 //If round = 4 -> displayView[Game_Over]
                 //Close App
-
         }
     }
 }
