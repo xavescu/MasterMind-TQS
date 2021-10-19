@@ -1,4 +1,4 @@
-package org.example.model.enums;
+package org.example.model.constants;
 
 public class Colors {
     public static final int BLACK = 0;

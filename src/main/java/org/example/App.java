@@ -16,8 +16,11 @@ public class App
         while(controller.isPlaying()){
             controller.listenKeyBoard();
             //display view [Choose your game]
+                //Cursor for the view?
+                //Arrow up/down + Return?
 
             //if P1vsP2 -> display view [P2, Define your code]
+            //if P1vsCPU -> display view [Define your proposal]
 
             //while !codeResolved -> display view [Define your proposal]
                 //Validate proposal

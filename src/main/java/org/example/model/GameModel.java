@@ -1,6 +1,6 @@
 package org.example.model;
 
-import org.example.model.enums.Roles;
+import org.example.model.constants.Roles;
 
 public class GameModel {
     private Board board = new Board();

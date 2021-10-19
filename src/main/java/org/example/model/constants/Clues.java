@@ -1,4 +1,4 @@
-package org.example.model.enums;
+package org.example.model.constants;
 
 public class Clues {
     public static int NO_CLUE = 0;
