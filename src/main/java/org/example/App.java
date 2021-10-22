@@ -14,10 +14,12 @@ public class App
         int turn = 0;
         int cursor = 0;
 
+
         // Game loop
-        while(controller.isPlaying()){
-            controller.listenKeyBoard();
-            //display view [Choose your game]
+        //while(controller.isPlaying()){
+            //We listen the keyboard to change the status of the game
+
+            //if first screen -> display view [Choose your game]
                 //Cursor for the view?
                 //Arrow up/down + Return?
 
@@ -41,6 +43,6 @@ public class App
                 //Update View
                 //If round = 4 -> displayView[Game_Over]
                 //Close App
-        }
+        //}
     }
 }
