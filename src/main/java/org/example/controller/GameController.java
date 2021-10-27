@@ -7,8 +7,8 @@ import java.util.Objects;
 import java.util.Scanner;
 
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
-import static org.example.controller.constants.Screens.BYEBYE_SCREEN;
-import static org.example.controller.constants.Screens.CODE_BREAKER_SCREEN;
+import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
+import static org.example.controller.constants.Screens.*;
 
 // Game loop
 //while(controller.isPlaying()){
@@ -72,7 +72,7 @@ public class GameController {
 
     public void getKeyBoardInput(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("What's your option?");
+        System.out.println("\nINPUT:");
         this.input = scanner.nextLine();
     }
 
@@ -80,27 +80,38 @@ public class GameController {
         //Clear app console
         clearConsole();
 
-        if(this.screen == 0){
-            System.out.println("<*> MASTERMIND <*>");
-            System.out.println("1) 1 Player");
-            System.out.println("2) 2 Players");
-            System.out.println("3) Exit");
+        if(this.screen == WELCOME_SCREEN){
+            view.printWelcomeView();
         }
-        if(this.screen == 1){
-            System.out.println("Expose your proposal");
+        if(this.screen == CODE_BREAKER_SCREEN){
+            view.printPlayersPoints();
+            view.printCodeBreakerView();
+        }
+        if(this.screen == CODE_MAKER_SCREEN){
+            view.printCodeMakerView();
+        }
+        if(this.screen == BYEBYE_SCREEN){
+            view.printByeByeView();
         }
     }
 
     public void processGame(){
-        if(this.screen == 0){
+        if(this.screen == WELCOME_SCREEN){
             if(Objects.equals(input, "1")){ //Start 1 player mode
-
+                gameMode = PLAYER_VS_CPU;
+                screen = CODE_BREAKER_SCREEN;
+                //Todo: Initialize Players? (P1, CPU)
+                //Todo: CPU Initialize it's CODE
+                //Todo: Logic of the CODE_BREAKER
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
-
+                gameMode = PLAYER_VS_PLAYER;
+                screen = CODE_MAKER_SCREEN;
+                //Todo: Initialize Players? (P1, P2)
+                //Todo: Logic of the CODE_MAKER
             }
             if(Objects.equals(input, "3")){ //End game
-
+                screen = BYEBYE_SCREEN;
                 this.play = false;
             }
         }
