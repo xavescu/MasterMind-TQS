@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import static org.example.controller.constants.Screens.*;
+
 public class GameControllerTest {
 
     @Before
@@ -35,7 +37,7 @@ public class GameControllerTest {
 
         //then
         controller.processGame();
-        Assert.assertEquals(1,controller.getScreen());
+        Assert.assertEquals(CODE_BREAKER_SCREEN,controller.getScreen());
     }
 
     @Test
@@ -51,7 +53,7 @@ public class GameControllerTest {
 
         //then
         controller.processGame();
-        Assert.assertEquals(0,controller.getScreen());
+        Assert.assertEquals(WELCOME_SCREEN,controller.getScreen());
     }
 
     @Test
@@ -67,7 +69,7 @@ public class GameControllerTest {
 
         //then
         controller.processGame();
-        Assert.assertEquals(2,controller.getScreen());
+        Assert.assertEquals(CODE_MAKER_SCREEN,controller.getScreen());
     }
 
     @Test
@@ -83,6 +85,6 @@ public class GameControllerTest {
 
         //then
         controller.processGame();
-        Assert.assertEquals(-1,controller.getScreen());
+        Assert.assertEquals(BYEBYE_SCREEN,controller.getScreen());
     }
 }
