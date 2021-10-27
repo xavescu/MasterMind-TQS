@@ -5,6 +5,7 @@ import org.example.view.GameView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Scanner;
 
 // Game loop
@@ -42,9 +43,8 @@ public class GameController {
     private GameView view;
     private int turn = 0;
     private int screen = 0;
-    int cursor = 0;
-    int input = 0;
-    boolean play = true;
+    private String input = "";
+    private boolean play = true;
 
     public GameController(GameView view, GameModel model){
         this.view = view;
@@ -55,10 +55,18 @@ public class GameController {
         return this.play;
     }
 
+    public int getScreen() {
+        return screen;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
     public void getKeyBoardInput(){
-        Scanner keyboard = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.println("What's your option?");
-        this.input = keyboard.nextInt();
+        this.input = scanner.nextLine();
     }
 
     public void updateView(){
@@ -78,11 +86,11 @@ public class GameController {
 
     public void processGame(){
         if(this.screen == 0){
-            if(input == 1){ //Start 1 player mode
+            if(Objects.equals(input, "1")){ //Start 1 player mode
             }
-            if(input == 2){ //Start 2 players mode
+            if(Objects.equals(input, "2")){ //Start 2 players mode
             }
-            if(input == 3){ //End game
+            if(Objects.equals(input, "3")){ //End game
                 this.play = false;
             }
         }
