@@ -3,10 +3,12 @@ package org.example.controller;
 import org.example.model.GameModel;
 import org.example.view.GameView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
 import java.util.Scanner;
+
+import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
+import static org.example.controller.constants.Screens.BYEBYE_SCREEN;
+import static org.example.controller.constants.Screens.CODE_BREAKER_SCREEN;
 
 // Game loop
 //while(controller.isPlaying()){
@@ -45,6 +47,7 @@ public class GameController {
     private int screen = 0;
     private String input = "";
     private boolean play = true;
+    private int gameMode = 0;
 
     public GameController(GameView view, GameModel model){
         this.view = view;
@@ -57,6 +60,10 @@ public class GameController {
 
     public int getScreen() {
         return screen;
+    }
+
+    public int getGameMode() {
+        return gameMode;
     }
 
     public int getTurn() {
@@ -87,10 +94,13 @@ public class GameController {
     public void processGame(){
         if(this.screen == 0){
             if(Objects.equals(input, "1")){ //Start 1 player mode
+
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
+
             }
             if(Objects.equals(input, "3")){ //End game
+
                 this.play = false;
             }
         }

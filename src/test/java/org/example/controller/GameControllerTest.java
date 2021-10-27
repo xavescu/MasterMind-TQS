@@ -10,6 +10,8 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
+import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
 
 public class GameControllerTest {
@@ -25,7 +27,7 @@ public class GameControllerTest {
 
 
     @Test
-    public void getKeyBoardInput_givenScreen0And1InputThenScreenIs1() {
+    public void getKeyBoardInput_Screen_givenScreen0And1InputThenScreenIsCodeBreaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -41,7 +43,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void getKeyBoardInput_givenScreen0AndInvalidInputThenScreenIs0() {
+    public void getKeyBoardInput_Screen_givenScreen0AndInvalidInputThenScreenIsWelcome() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "sadaf!";
@@ -57,7 +59,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void getKeyBoardInput_givenScreen0And2InputThenScreenIs2() {
+    public void getKeyBoardInput_Screen_givenScreen0And2InputThenScreenIsCodeMaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "2";
@@ -73,7 +75,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void getKeyBoardInput_givenScreen0And3InputThenScreenIsNegative1() {
+    public void getKeyBoardInput_Screen_givenScreen0And3InputThenScreenIsByeBye() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "3";
@@ -86,5 +88,53 @@ public class GameControllerTest {
         //then
         controller.processGame();
         Assert.assertEquals(BYEBYE_SCREEN,controller.getScreen());
+    }
+
+    @Test
+    public void getKeyBoardInput_GameMode_givenScreen0And1InputThenGameModeIsPvCPU() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        controller.getKeyBoardInput();
+
+        //then
+        controller.processGame();
+        Assert.assertEquals(PLAYER_VS_CPU,controller.getGameMode());
+    }
+
+    @Test
+    public void getKeyBoardInput_GameMode_givenScreen0AndInvalidInputThenGameModeIs0() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "sadaf!";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        controller.getKeyBoardInput();
+
+        //then
+        controller.processGame();
+        Assert.assertEquals(0,controller.getGameMode());
+    }
+
+    @Test
+    public void getKeyBoardInput_GameMode_givenScreen0And2InputThenGameModeIsPvsP() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "2";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        controller.getKeyBoardInput();
+
+        //then
+        controller.processGame();
+        Assert.assertEquals(PLAYER_VS_PLAYER,controller.getGameMode());
     }
 }
