@@ -81,6 +81,10 @@ public class GameController {
         this.input = scanner.nextLine();
     }
 
+    public Row getRow(int i){
+        return model.getBoard().getRow(i);
+    }
+
     public void updateView(){
         //Clear app console
         clearConsole();

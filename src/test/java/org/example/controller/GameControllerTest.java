@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
+import org.example.model.constants.Colors;
 import org.example.view.GameView;
 import org.junit.After;
 import org.junit.Assert;
@@ -215,5 +216,30 @@ public class GameControllerTest {
                 || "3".equals(secretCodeValues)
                 || "4".equals(secretCodeValues)
                 || "5".equals(secretCodeValues));
+    }
+
+    @Test
+    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_ALL_WHITE() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "WWWWW";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.WHITE);
     }
 }
