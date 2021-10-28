@@ -156,7 +156,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void CPUInitializeCode_SecretCodeContainsValidColors() {
+    public void CPUInitializeCode_SecretCodeHasTheExpectedLength() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -168,6 +168,10 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertNotSame(controller.getSecretCode().getColor(0), Colors.BLUE);
+        Assert.assertNotNull(controller.getSecretCode().getColor(0));
+        Assert.assertNotNull(controller.getSecretCode().getColor(1));
+        Assert.assertNotNull(controller.getSecretCode().getColor(2));
+        Assert.assertNotNull(controller.getSecretCode().getColor(3));
+        Assert.assertNotNull(controller.getSecretCode().getColor(4));
     }
 }
