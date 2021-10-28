@@ -21,7 +21,7 @@ public class Board {
         return secretCode;
     }
 
-    public void setUpSecretCode(ArrayList<Colors> code){
+    public void setUpSecretCode(ArrayList<Integer> code){
         secretCode.setCode(code);
     }
 }

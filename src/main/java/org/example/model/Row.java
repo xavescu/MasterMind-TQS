@@ -6,7 +6,7 @@ import org.example.model.constants.Colors;
 import java.util.ArrayList;
 
 public class Row {
-    private ArrayList<Colors> code = new ArrayList(4);
+    private ArrayList<Integer> code = new ArrayList(4);
     private ArrayList<Clues> clues = new ArrayList(4);
 
     public ArrayList<Clues> getClues() {
@@ -17,11 +17,11 @@ public class Row {
         this.clues = clues;
     }
 
-    public Colors getColor(int i) {
+    public int getColor(int i) {
         return code.get(i);
     }
 
-    public void setCode(ArrayList<Colors> code) {
+    public void setCode(ArrayList<Integer> code) {
         this.code = code;
     }
 }
