@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
+import org.example.model.constants.Colors;
 import org.example.view.GameView;
 import org.junit.After;
 import org.junit.Assert;
@@ -36,9 +37,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(CODE_BREAKER_SCREEN,controller.getScreen());
     }
 
@@ -52,9 +53,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(WELCOME_SCREEN,controller.getScreen());
     }
 
@@ -68,9 +69,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(CODE_MAKER_SCREEN,controller.getScreen());
     }
 
@@ -84,9 +85,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(BYEBYE_SCREEN,controller.getScreen());
     }
 
@@ -100,9 +101,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(PLAYER_VS_CPU,controller.getGameMode());
     }
 
@@ -116,9 +117,9 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(0,controller.getGameMode());
     }
 
@@ -132,9 +133,41 @@ public class GameControllerTest {
 
         //when
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //then
-        controller.processGame();
         Assert.assertEquals(PLAYER_VS_PLAYER,controller.getGameMode());
+    }
+
+    @Test
+    public void CPUInitializeCode_SecretCodeIsNotNull() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertNotNull(controller.getSecretCode());
+    }
+
+    @Test
+    public void CPUInitializeCode_SecretCodeContainsValidColors() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertNotSame(controller.getSecretCode().getColor(0), Colors.BLUE);
     }
 }

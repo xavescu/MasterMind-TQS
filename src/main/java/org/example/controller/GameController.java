@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
+import org.example.model.Row;
 import org.example.view.GameView;
 
 import java.util.Objects;
@@ -68,6 +69,10 @@ public class GameController {
 
     public int getTurn() {
         return turn;
+    }
+
+    public Row getSecretCode(){
+        return model.getSecretCode();
     }
 
     public void getKeyBoardInput(){

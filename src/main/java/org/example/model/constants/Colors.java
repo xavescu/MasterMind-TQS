@@ -1,7 +1,6 @@
 package org.example.model.constants;
 
 public class Colors {
-    public static final int BLACK = 0;
     public static final int WHITE = 1;
     public static final int RED = 2;
     public static final int BLUE = 3;

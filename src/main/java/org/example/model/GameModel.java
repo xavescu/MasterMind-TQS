@@ -11,6 +11,10 @@ public class GameModel {
         return board;
     }
 
+    public Row getSecretCode(){
+        return board.getSecretCode();
+    }
+
     public Player getPlayer1() {
         return player1;
     }

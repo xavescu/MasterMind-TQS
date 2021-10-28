@@ -17,8 +17,8 @@ public class Row {
         this.clues = clues;
     }
 
-    public ArrayList<Colors> getCode() {
-        return code;
+    public Colors getColor(int i) {
+        return code.get(i);
     }
 
     public void setCode(ArrayList<Colors> code) {
