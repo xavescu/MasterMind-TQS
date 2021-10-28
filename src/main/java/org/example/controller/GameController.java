@@ -107,7 +107,7 @@ public class GameController {
                 screen = CODE_BREAKER_SCREEN;
                 //Todo: Initialize Players? (P1, CPU)
                 //Todo: CPU Initialize it's CODE
-                model.getBoard().defineNewSecretCode();
+                model.getBoard().defineRandomSecretCode();
                 //Todo: Logic of the CODE_BREAKER
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode

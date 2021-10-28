@@ -22,11 +22,11 @@ public class Board {
         return secretCode;
     }
 
-    public void setUpSecretCode(ArrayList<Integer> code){
+    public void defineSecretCode(ArrayList<Integer> code){
         secretCode.setCode(code);
     }
 
-    public void defineNewSecretCode(){
+    public void defineRandomSecretCode(){
         ArrayList<Integer> secretCode = new ArrayList<>();
         for(int i=0; i<5; i++){
             int rand = new Random().nextInt(5); //Generate int [0...4]
