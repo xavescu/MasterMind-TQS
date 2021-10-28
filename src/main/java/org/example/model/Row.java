@@ -21,6 +21,10 @@ public class Row {
         return code.get(i);
     }
 
+    public int getCodeLength(){
+        return code.size();
+    }
+
     public void setCode(ArrayList<Integer> code) {
         this.code = code;
     }

@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
-import org.example.model.constants.Colors;
 import org.example.view.GameView;
 import org.junit.After;
 import org.junit.Assert;
@@ -140,7 +139,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void CPUInitializeCode_SecretCodeIsNotNull() {
+    public void CPUInitializeCode_CPU_SecretCodeIsNotNull() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -156,7 +155,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void CPUInitializeCode_SecretCodeHasTheExpectedLength() {
+    public void CPUInitializeCode_CPU_SecretCodeHasTheExpectedLength() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -168,10 +167,53 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertNotNull(controller.getSecretCode().getColor(0));
-        Assert.assertNotNull(controller.getSecretCode().getColor(1));
-        Assert.assertNotNull(controller.getSecretCode().getColor(2));
-        Assert.assertNotNull(controller.getSecretCode().getColor(3));
-        Assert.assertNotNull(controller.getSecretCode().getColor(4));
+        Assert.assertEquals(controller.getSecretCode().getCodeLength(), 5);
+    }
+
+    //Todo: transform this in a parametrized test to do the loop of positions. Also best code quality
+    @Test
+    public void CPUInitializeCode_CPU_SecretCodeHasValidIntegersValues() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        String secretCodeValues = "";
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        secretCodeValues += controller.getSecretCode().getColor(0);
+        Assert.assertTrue("1".equals(secretCodeValues)
+                || "2".equals(secretCodeValues)
+                || "3".equals(secretCodeValues)
+                || "4".equals(secretCodeValues)
+                || "5".equals(secretCodeValues));
+        secretCodeValues = ""+controller.getSecretCode().getColor(1);
+        Assert.assertTrue("1".equals(secretCodeValues)
+                || "2".equals(secretCodeValues)
+                || "3".equals(secretCodeValues)
+                || "4".equals(secretCodeValues)
+                || "5".equals(secretCodeValues));
+        secretCodeValues = ""+controller.getSecretCode().getColor(2);
+        Assert.assertTrue("1".equals(secretCodeValues)
+                || "2".equals(secretCodeValues)
+                || "3".equals(secretCodeValues)
+                || "4".equals(secretCodeValues)
+                || "5".equals(secretCodeValues));
+        secretCodeValues = ""+controller.getSecretCode().getColor(3);
+        Assert.assertTrue("1".equals(secretCodeValues)
+                || "2".equals(secretCodeValues)
+                || "3".equals(secretCodeValues)
+                || "4".equals(secretCodeValues)
+                || "5".equals(secretCodeValues));
+        secretCodeValues = ""+controller.getSecretCode().getColor(4);
+        Assert.assertTrue("1".equals(secretCodeValues)
+                || "2".equals(secretCodeValues)
+                || "3".equals(secretCodeValues)
+                || "4".equals(secretCodeValues)
+                || "5".equals(secretCodeValues));
     }
 }
