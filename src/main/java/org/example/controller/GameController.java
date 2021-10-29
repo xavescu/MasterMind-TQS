@@ -98,7 +98,7 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             view.printPlayersPoints();
-            view.printCodeBreakerView();
+            view.printCodeBreakerView(); //Todo: Avoid the hardcoding approach, use the actual data from the board
         }
         if(this.screen == CODE_MAKER_SCREEN){
             view.printCodeMakerView();
@@ -114,9 +114,7 @@ public class GameController {
                 gameMode = PLAYER_VS_CPU;
                 screen = CODE_BREAKER_SCREEN;
                 //Todo: Initialize Players? (P1, CPU)
-                //Todo: CPU Initialize it's CODE
                 model.getBoard().defineRandomSecretCode();
-                //Todo: Logic of the CODE_BREAKER
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
                 gameMode = PLAYER_VS_PLAYER;
@@ -129,6 +127,17 @@ public class GameController {
                 this.play = false;
             }
         }
+        if(this.screen == CODE_BREAKER_SCREEN){
+            if(isValidCodeProposal(input)){
+                //Process input
+            }
+        }
+    }
+
+    public boolean isValidCodeProposal(String input){
+        boolean valid = true;
+
+        return true;
     }
 
     private static void clearConsole(){
