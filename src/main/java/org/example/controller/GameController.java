@@ -85,6 +85,10 @@ public class GameController {
         return model.getBoard().getRow(i);
     }
 
+    public int getRowsCount(){
+        return model.getBoard().getRowsCount();
+    }
+
     public void updateView(){
         //Clear app console
         clearConsole();

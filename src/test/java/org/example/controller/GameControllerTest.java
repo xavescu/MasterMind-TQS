@@ -242,4 +242,96 @@ public class GameControllerTest {
         Assert.assertEquals(controller.getRow(0).getColor(3), Colors.WHITE);
         Assert.assertEquals(controller.getRow(0).getColor(4), Colors.WHITE);
     }
+
+    @Test
+    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_ALL_RED() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RRRRR";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.RED);
+    }
+
+    @Test
+    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_EACH_COLOR() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RBWGY";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.BLUE);
+        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.GREEN);
+        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.YELLOW);
+    }
+
+    @Test
+    public void getKeyBoardInput_P1CodeBreaker_P1EntersInvalidInput_LONG_ANSWER() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RBWGWW";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRowsCount(), 0);
+    }
+
+    @Test
+    public void getKeyBoardInput_P1CodeBreaker_P1EntersInvalidInput_WRONG_CHARACTERS() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RfW!W6";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRowsCount(), 0);
+    }
 }

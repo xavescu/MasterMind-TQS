@@ -18,6 +18,10 @@ public class Board {
         this.rows.add(row);
     }
 
+    public int getRowsCount(){
+        return rows.size();
+    }
+
     public Row getSecretCode(){
         return secretCode;
     }
