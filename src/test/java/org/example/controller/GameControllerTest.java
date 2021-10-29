@@ -219,7 +219,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_ALL_WHITE() {
+    public void isValidCode_ValidInput_ALL_WHITE() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -236,15 +236,11 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.WHITE);
+        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
     }
 
     @Test
-    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_ALL_RED() {
+    public void isValidCode_ValidInput_ALL_RED() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -261,15 +257,11 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.RED);
+        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
     }
 
     @Test
-    public void getKeyBoardInput_P1CodeBreaker_P1EntersValidInput_EACH_COLOR() {
+    public void isValidCode_ValidInput_EACH_COLOR() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -286,15 +278,11 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.BLUE);
-        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.GREEN);
-        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.YELLOW);
+        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
     }
 
     @Test
-    public void getKeyBoardInput_P1CodeBreaker_P1EntersInvalidInput_LONG_ANSWER() {
+    public void isValidCode_ValidInput_LONG_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -311,11 +299,32 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRowsCount(), 0);
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
     }
 
     @Test
-    public void getKeyBoardInput_P1CodeBreaker_P1EntersInvalidInput_WRONG_CHARACTERS() {
+    public void isValidCode_ValidInput_SHORT_ANSWER() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RBW";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+    }
+
+    @Test
+    public void isValidCode_ValidInput_WRONG_CHARACTERS() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -332,6 +341,6 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRowsCount(), 0);
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
     }
 }
