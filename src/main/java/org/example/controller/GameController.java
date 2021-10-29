@@ -129,15 +129,25 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             if(isValidCodeProposal(input)){
-                //Process input
+                processCodeProposal(input);
             }
         }
     }
 
     public boolean isValidCodeProposal(String input){
-        boolean valid = true;
-
+        if(input.length() != 5){
+            return false;
+        }
+        for(int i=0; i<5; i++){
+            if((input.charAt(i) != ('W'))&&(input.charAt(i) != ('Y'))&&(input.charAt(i) != ('G'))&&(input.charAt(i) != ('B'))&&(input.charAt(i) != ('R'))){
+                return false;
+            }
+        }
         return true;
+    }
+
+    public void processCodeProposal(String input){
+
     }
 
     private static void clearConsole(){

@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
@@ -219,48 +220,6 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_ValidInput_ALL_WHITE() {
-        //given
-        GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "WWWWW";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //then
-        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
-    }
-
-    @Test
-    public void isValidCode_ValidInput_ALL_RED() {
-        //given
-        GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RRRRR";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //then
-        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
-    }
-
-    @Test
     public void isValidCode_ValidInput_EACH_COLOR() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
@@ -282,7 +241,28 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_ValidInput_LONG_ANSWER() {
+    public void isValidCode_InvalidInput_EACH_COLOR_LOWERCASE() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "rbwgy";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+    }
+
+    @Test
+    public void isValidCode_InvalidInput_LONG_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -303,7 +283,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_ValidInput_SHORT_ANSWER() {
+    public void isValidCode_InvalidInput_SHORT_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
@@ -324,11 +304,11 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_ValidInput_WRONG_CHARACTERS() {
+    public void isValidCode_InvalidInput_WRONG_CHARACTERS() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
-        String codeProposalInput = "RfW!W6";
+        String codeProposalInput = "RfW!W";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         controller.getKeyBoardInput();
@@ -342,5 +322,30 @@ public class GameControllerTest {
 
         //then
         Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+    }
+
+    @Test
+    public void processCodeProposal_ExpectedColorsAreSet() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RBWGY";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.BLUE);
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.GREEN);
+        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.YELLOW);
     }
 }
