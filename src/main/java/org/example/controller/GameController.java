@@ -2,8 +2,10 @@ package org.example.controller;
 
 import org.example.model.GameModel;
 import org.example.model.Row;
+import org.example.model.constants.Colors;
 import org.example.view.GameView;
 
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -147,7 +149,27 @@ public class GameController {
     }
 
     public void processCodeProposal(String input){
-
+        ArrayList<Integer> codeProposal = new ArrayList<>();
+        Row row = new Row();
+        for(int i=0; i<5; i++){
+            if(input.charAt(i) == ('W')){
+                codeProposal.add(Colors.WHITE);
+            }
+            if(input.charAt(i) == ('G')){
+                codeProposal.add(Colors.GREEN);
+            }
+            if(input.charAt(i) == ('B')){
+                codeProposal.add(Colors.BLUE);
+            }
+            if(input.charAt(i) == ('R')){
+                codeProposal.add(Colors.RED);
+            }
+            if(input.charAt(i) == ('Y')){
+                codeProposal.add(Colors.YELLOW);
+            }
+        }
+        row.setCode(codeProposal);
+        model.addRow(row);
     }
 
     private static void clearConsole(){

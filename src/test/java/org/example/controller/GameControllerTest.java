@@ -343,9 +343,9 @@ public class GameControllerTest {
 
         //then
         Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.BLUE);
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.GREEN);
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.YELLOW);
+        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.BLUE);
+        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
+        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.GREEN);
+        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.YELLOW);
     }
 }

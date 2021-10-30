@@ -11,6 +11,10 @@ public class GameModel {
         return board;
     }
 
+    public void addRow(Row row){
+        board.addRow(row);
+    }
+
     public Row getSecretCode(){
         return board.getSecretCode();
     }
