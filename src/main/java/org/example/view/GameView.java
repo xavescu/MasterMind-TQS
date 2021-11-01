@@ -5,6 +5,8 @@ import org.example.model.Row;
 import org.example.model.constants.Clues;
 import org.example.model.constants.Colors;
 
+import static org.example.model.constants.SetUp.NUM_OF_TRIES;
+
 public class GameView {
     private final String ANSI_RESET = "\u001B[0m";
     private final String ANSI_BLACK = "\u001B[30m";
@@ -33,7 +35,7 @@ public class GameView {
     }
 
     public void printCodeBreakerView(Board board){
-        for(int i=9; i>=1; i--){ //i = 9..1
+        for(int i=NUM_OF_TRIES; i>=1; i--){ //i = 9..1
             if(board.getRowsCount()>=i){
                 System.out.println(printCodeBreakerView_Row(board.getRow(i-1), i-1));
             } else {
@@ -90,9 +92,6 @@ public class GameView {
             output.append(WHITE_CROSS);
         }
         if(redClues+whiteClues!=5){
-            if((redClues+whiteClues)==0){
-                output.append("_____");
-            }
             for(int i=0; i<5-(redClues+whiteClues); i++){
                 output.append("_");
             }
