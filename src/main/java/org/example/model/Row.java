@@ -6,8 +6,8 @@ import org.example.model.constants.Colors;
 import java.util.ArrayList;
 
 public class Row {
-    private ArrayList<Integer> code = new ArrayList(4);
-    private ArrayList<Clues> clues = new ArrayList(4);
+    private ArrayList<Integer> code = new ArrayList();
+    private ArrayList<Clues> clues = new ArrayList();
 
     public ArrayList<Clues> getClues() {
         return clues;

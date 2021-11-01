@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
+import org.example.model.constants.Clues;
 import org.example.model.constants.Colors;
 import org.example.view.GameView;
 import org.junit.After;
@@ -11,6 +12,7 @@ import org.junit.Test;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
@@ -169,7 +171,7 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getSecretCode().getCodeLength(), 5);
+        Assert.assertEquals(5, controller.getSecretCode().getCodeLength());
     }
 
     //Todo: transform this in a parametrized test to do the loop of positions. Also best code quality
@@ -342,10 +344,34 @@ public class GameControllerTest {
         controller.processGame();
 
         //then
-        Assert.assertEquals(controller.getRow(0).getColor(0), Colors.RED);
-        Assert.assertEquals(controller.getRow(0).getColor(1), Colors.BLUE);
-        Assert.assertEquals(controller.getRow(0).getColor(2), Colors.WHITE);
-        Assert.assertEquals(controller.getRow(0).getColor(3), Colors.GREEN);
-        Assert.assertEquals(controller.getRow(0).getColor(4), Colors.YELLOW);
+        Assert.assertEquals(Colors.RED, controller.getRow(0).getColor(0));
+        Assert.assertEquals(Colors.BLUE, controller.getRow(0).getColor(1));
+        Assert.assertEquals(Colors.WHITE, controller.getRow(0).getColor(2));
+        Assert.assertEquals(Colors.GREEN, controller.getRow(0).getColor(3));
+        Assert.assertEquals(Colors.YELLOW, controller.getRow(0).getColor(4));
+    }
+
+    @Test
+    public void addCluesToRow_ExpectedCluesAreSet() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        String input = "1";
+        String codeProposalInput = "RBWGY";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        controller.addCluesToRow(); //Secret Code = RBBYG
+
+        //then
+        Assert.assertEquals(2, controller.getRedCluesCount(0));
+        Assert.assertEquals(2, controller.getWhiteCluesCount(0));
+        Assert.assertEquals(1, controller.getVoidCluesCount(0));
     }
 }

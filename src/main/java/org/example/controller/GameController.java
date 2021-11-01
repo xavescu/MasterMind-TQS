@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.GameModel;
 import org.example.model.Row;
+import org.example.model.constants.Clues;
 import org.example.model.constants.Colors;
 import org.example.view.GameView;
 
@@ -131,7 +132,8 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             if(isValidCodeProposal(input)){
-                processCodeProposal(input);
+                processCodeProposal(input); //Add a new try row with the colors
+                addCluesToRow();//Add the clues for that row
             }
         }
     }
@@ -170,6 +172,20 @@ public class GameController {
         }
         row.setCode(codeProposal);
         model.addRow(row);
+    }
+
+    public void addCluesToRow(){
+
+    }
+
+    public int getRedCluesCount(int rowNum){
+        return 0;
+    }
+    public int getWhiteCluesCount(int rowNum){
+        return 0;
+    }
+    public int getVoidCluesCount(int rowNum){
+        return 0;
     }
 
     private static void clearConsole(){
