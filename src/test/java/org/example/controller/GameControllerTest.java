@@ -399,10 +399,58 @@ public class GameControllerTest {
         controller.getKeyBoardInput();
         controller.processGame();
         //All must be good
+        Assert.assertEquals("Assert NoClues are fine:",5, controller.getVoidCluesCount(0));
+    }
+
+    @Test
+    public void isCodeResolved_CodeIsNotResolved() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("RRRRR");
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "BBBBB";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+
+        //when
+        controller.processGame();
+
 
         //then
-        //Assert.assertEquals("Assert RedClues are fine:",2, controller.getRedCluesCount(0));
-        //Assert.assertEquals("Assert WhiteClues are fine:",2, controller.getWhiteCluesCount(0));
-        Assert.assertEquals("Assert NoClues are fine:",5, controller.getVoidCluesCount(0));
+        Assert.assertFalse(controller.isCodeResolved());
+
+    }
+
+    @Test
+    public void isCodeResolved_CodeIsResolved() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("RRRRR");
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "RRRRR";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+
+        //when
+        controller.processGame();
+
+        //then
+        Assert.assertTrue(controller.isCodeResolved());
     }
 }
