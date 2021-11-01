@@ -53,7 +53,6 @@ public class GameController {
     private String input = "";
     private boolean play = true;
     private int gameMode = 0;
-    private boolean codeResolved = false;
 
     public GameController(GameView view, GameModel model){
         this.view = view;
@@ -87,7 +86,15 @@ public class GameController {
     }
 
     public boolean isCodeResolved(){
-        return codeResolved;
+        boolean resolved = true;
+        if(getRowsCount()!=0){
+            for(int i=0; i<5;i++){
+                if(getSecretCode().getColor(i)!=getRow(getRowsCount()-1).getColor(i)){
+                    resolved = false;
+                }
+            }
+        }
+        return resolved;
     }
 
     public Row getRow(int i){
