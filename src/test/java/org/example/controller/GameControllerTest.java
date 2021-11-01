@@ -376,4 +376,33 @@ public class GameControllerTest {
         Assert.assertEquals("Assert WhiteClues are fine:",2, controller.getWhiteCluesCount(0));
         Assert.assertEquals("Assert NoClues are fine:",1, controller.getVoidCluesCount(0));
     }
+
+    /**
+     * BUG!
+     * When we enter a code proposal without any color that is in SecretCode the app explodes...
+     */
+    @Test
+    public void bug1_GivenASecretCodeWhenEnterAProposalWithoutAnyColorMatchThenTheAppExplodes() {
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("RRRRR"); //Todo: refactor this code
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "BBBBB";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //All must be good
+
+        //then
+        //Assert.assertEquals("Assert RedClues are fine:",2, controller.getRedCluesCount(0));
+        //Assert.assertEquals("Assert WhiteClues are fine:",2, controller.getWhiteCluesCount(0));
+        Assert.assertEquals("Assert NoClues are fine:",5, controller.getVoidCluesCount(0));
+    }
 }

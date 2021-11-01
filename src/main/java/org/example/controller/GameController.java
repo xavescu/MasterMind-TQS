@@ -192,7 +192,8 @@ public class GameController {
             }
         }
         if(clues.size()!=5){
-            for(int i=0; i<(5-clues.size());i++){
+            int tempCluesSize = 5-clues.size();
+            for(int i=0; i<tempCluesSize;i++){
                 clues.add(Clues.NO_CLUE);
             }
         }
