@@ -16,6 +16,10 @@ public class Row {
         this.clues = clues;
     }
 
+    public int getClue(int i){
+        return clues.get(i);
+    }
+
     public int getColor(int i) {
         return code.get(i);
     }

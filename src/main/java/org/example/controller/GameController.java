@@ -102,7 +102,7 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             view.printPlayersPoints();
-            view.printCodeBreakerView(); //Todo: Avoid the hardcoding approach, use the actual data from the board
+            view.printCodeBreakerView(model.getBoard()); //Todo: Avoid the hardcoding approach, use the actual data from the board
         }
         if(this.screen == CODE_MAKER_SCREEN){
             view.printCodeMakerView();
