@@ -35,7 +35,7 @@ public class GameView {
     }
 
     public void printCodeBreakerView(Board board){
-        for(int i=NUM_OF_TRIES; i>=1; i--){ //i = 9..1
+        for(int i=NUM_OF_TRIES; i>=1; i--){ //i = NUM_OF_TRIES..1
             if(board.getRowsCount()>=i){
                 System.out.println(printCodeBreakerView_Row(board.getRow(i-1), i-1));
             } else {
