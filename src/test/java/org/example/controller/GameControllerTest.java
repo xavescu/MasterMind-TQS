@@ -354,6 +354,7 @@ public class GameControllerTest {
     @Test
     public void addCluesToRow_ExpectedCluesAreSet() {
         //given
+        int rowNumber = 0;
         GameController controller = new GameController(new GameView(), new GameModel());
         String input = "1";
         String codeProposalInput = "RBWGY";
@@ -367,11 +368,12 @@ public class GameControllerTest {
         controller.processGame();
 
         //when
-        controller.addCluesToRow(); //Secret Code = RBBYG
+        controller.getBoard().defineManualSecretCode("RBBYG"); //Todo: refactor this code
+        controller.addCluesToRow(rowNumber); //Secret Code = RBBYG
 
         //then
-        Assert.assertEquals(2, controller.getRedCluesCount(0));
-        Assert.assertEquals(2, controller.getWhiteCluesCount(0));
-        Assert.assertEquals(1, controller.getVoidCluesCount(0));
+        Assert.assertEquals("Assert RedClues are fine:",2, controller.getRedCluesCount(0));
+        Assert.assertEquals("Assert WhiteClues are fine:",2, controller.getWhiteCluesCount(0));
+        Assert.assertEquals("Assert NoClues are fine:",1, controller.getVoidCluesCount(0));
     }
 }

@@ -38,4 +38,28 @@ public class Board {
         }
         this.secretCode.setCode(secretCode);
     }
+
+    public void defineManualSecretCode(String manuealSecretCode){
+        ArrayList<Integer> newSecretCode = new ArrayList<>();
+
+        for(int i=0; i<5; i++){
+            if(manuealSecretCode.charAt(i) == ('W')){
+                newSecretCode.add(Colors.WHITE);
+            }
+            if(manuealSecretCode.charAt(i) == ('G')){
+                newSecretCode.add(Colors.GREEN);
+            }
+            if(manuealSecretCode.charAt(i) == ('B')){
+                newSecretCode.add(Colors.BLUE);
+            }
+            if(manuealSecretCode.charAt(i) == ('R')){
+                newSecretCode.add(Colors.RED);
+            }
+            if(manuealSecretCode.charAt(i) == ('Y')){
+                newSecretCode.add(Colors.YELLOW);
+            }
+        }
+
+        this.secretCode.setCode(newSecretCode);
+    }
 }

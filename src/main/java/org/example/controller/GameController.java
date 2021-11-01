@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.model.Board;
 import org.example.model.GameModel;
 import org.example.model.Row;
 import org.example.model.constants.Clues;
@@ -133,7 +134,7 @@ public class GameController {
         if(this.screen == CODE_BREAKER_SCREEN){
             if(isValidCodeProposal(input)){
                 processCodeProposal(input); //Add a new try row with the colors
-                addCluesToRow();//Add the clues for that row
+                addCluesToRow(getRowsCount()-1);//Add the clues for that row
             }
         }
     }
@@ -174,18 +175,63 @@ public class GameController {
         model.addRow(row);
     }
 
-    public void addCluesToRow(){
-
+    public void addCluesToRow(int rowNumber){
+        Row secretCode = model.getSecretCode();
+        Row row = getRow(rowNumber);
+        ArrayList<Integer> clues = new ArrayList<>();
+        for(int i=0; i<row.getCodeLength(); i++){
+            if(secretCode.getColor(i)==row.getColor(i)){
+                clues.add(Clues.EXACT_POSITION);
+            }else{
+                for(int j=0; j<row.getCodeLength(); j++){
+                    if(secretCode.getColor(j)==row.getColor(i)){
+                        clues.add(Clues.WRONG_POSITION);
+                        break;
+                    }
+                }
+            }
+        }
+        if(clues.size()!=5){
+            for(int i=0; i<(5-clues.size());i++){
+                clues.add(Clues.NO_CLUE);
+            }
+        }
+        row.setClues(clues);
     }
 
     public int getRedCluesCount(int rowNum){
-        return 0;
+        int redCluesCount = 0;
+        Row row = model.getBoard().getRow(rowNum);
+        for(int i=0; i<row.getClues().size(); i++){
+            if(row.getClues().get(i).equals(Clues.EXACT_POSITION)){
+                redCluesCount++;
+            }
+        }
+        return redCluesCount;
     }
     public int getWhiteCluesCount(int rowNum){
-        return 0;
+        int redCluesCount = 0;
+        Row row = model.getBoard().getRow(rowNum);
+        for(int i=0; i<row.getClues().size(); i++){
+            if(row.getClues().get(i).equals(Clues.WRONG_POSITION)){
+                redCluesCount++;
+            }
+        }
+        return redCluesCount;
     }
     public int getVoidCluesCount(int rowNum){
-        return 0;
+        int redCluesCount = 0;
+        Row row = model.getBoard().getRow(rowNum);
+        for(int i=0; i<row.getClues().size(); i++){
+            if(row.getClues().get(i).equals(Clues.NO_CLUE)){
+                redCluesCount++;
+            }
+        }
+        return redCluesCount;
+    }
+
+    public Board getBoard(){
+        return model.getBoard();
     }
 
     private static void clearConsole(){

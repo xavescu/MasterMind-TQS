@@ -1,19 +1,18 @@
 package org.example.model;
 
-import org.example.model.constants.Clues;
-import org.example.model.constants.Colors;
 
 import java.util.ArrayList;
 
 public class Row {
     private ArrayList<Integer> code = new ArrayList();
-    private ArrayList<Clues> clues = new ArrayList();
+    private ArrayList<Integer> clues = new ArrayList();
 
-    public ArrayList<Clues> getClues() {
+
+    public ArrayList<Integer> getClues() {
         return clues;
     }
 
-    public void setClues(ArrayList<Clues> clues) {
+    public void setClues(ArrayList<Integer> clues) {
         this.clues = clues;
     }
 
