@@ -53,6 +53,7 @@ public class GameController {
     private String input = "";
     private boolean play = true;
     private int gameMode = 0;
+    private boolean codeResolved = false;
 
     public GameController(GameView view, GameModel model){
         this.view = view;
@@ -85,6 +86,10 @@ public class GameController {
         this.input = scanner.nextLine();
     }
 
+    public boolean isCodeResolved(){
+        return codeResolved;
+    }
+
     public Row getRow(int i){
         return model.getBoard().getRow(i);
     }
@@ -102,6 +107,9 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             view.printPlayersPoints();
+            if(isCodeResolved()){//SecretCode is breaked
+                view.printSecretCodeResolved(getSecretCode());//print secret code
+            }
             view.printCodeBreakerView(model.getBoard()); //Todo: Avoid the hardcoding approach, use the actual data from the board
         }
         if(this.screen == CODE_MAKER_SCREEN){

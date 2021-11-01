@@ -110,4 +110,29 @@ public class GameView {
     public void printPlayersPoints(){
         System.out.println("Player 1: 0pts       Player 2: 0pts");
     }
+
+    public void printSecretCodeResolved(Row secretCode){
+        StringBuilder output = new StringBuilder();
+
+        output.append("CODE RESOLVED! => ");
+
+        for(int i=0;i<secretCode.getCodeLength(); i++){
+            if(secretCode.getColor(i) == Colors.WHITE){
+                output.append("[" + WHITE_BOX + "]");
+            }
+            if(secretCode.getColor(i) == Colors.RED){
+                output.append("[" + RED_BOX + "]");
+            }
+            if(secretCode.getColor(i) == Colors.BLUE){
+                output.append("[" + BLUE_BOX + "]");
+            }
+            if(secretCode.getColor(i) == Colors.GREEN){
+                output.append("[" + GREEN_BOX + "]");
+            }
+            if(secretCode.getColor(i) == Colors.YELLOW){
+                output.append("[" + YELLOW_BOX + "]");
+            }
+        }
+        System.out.println(output);
+    }
 }
