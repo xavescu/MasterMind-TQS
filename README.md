@@ -3,7 +3,7 @@
 El meu projecte consisteix en el desenvolupament del joc MasterMind. El projecte serà desenvolupat en Java.
 
 # Regles de joc 
-MasterMind es un joc on 2 jugadors es reparteixen els rols de "CodeMaker" i "CodeBraker". 
+MasterMind és un joc on 2 jugadors es reparteixen els rols de "CodeMaker" i "CodeBraker". 
 
 El "CodeMaker" serà responsable de crear un codi secret, una combinació de 6 colors (Blanc, Negre, Blau, Verd, Groc i Vermell). El "CodeBreaker" disposa de 10 torns per endevinar el codi. A cada torn, el "CodeBreaker" proposarà una solució. El "CodeMaker" donarà pistes per ajudar a resoldre el codi secret. Puntuarà amb un punt blanc per cada color que  es trobi en el codi secret pero no en la mateixa posició i un punt vermell si un color es troba en el codi i en la posició correcte.
 
