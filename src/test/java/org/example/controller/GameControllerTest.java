@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import org.example.model.GameModel;
-import org.example.model.constants.Clues;
 import org.example.model.constants.Colors;
 import org.example.view.GameView;
 import org.junit.After;
@@ -9,10 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
@@ -378,7 +375,7 @@ public class GameControllerTest {
     }
 
     /**
-     * BUG!
+     * BUG1
      * When we enter a code proposal without any color that is in SecretCode the app explodes...
      */
     @Test

@@ -97,6 +97,10 @@ public class GameController {
         return resolved;
     }
 
+    public boolean isAllAttemptsDone(){
+        return (getRowsCount()==10);
+    }
+
     public Row getRow(int i){
         return model.getBoard().getRow(i);
     }
@@ -118,6 +122,9 @@ public class GameController {
                 view.printSecretCodeResolved(getSecretCode());//print secret code
             }
             view.printCodeBreakerView(model.getBoard()); //Todo: Avoid the hardcoding approach, use the actual data from the board
+            if(!isCodeResolved()&&isAllAttemptsDone()){
+                view.printCodeNotResolved(getSecretCode());
+            }
         }
         if(this.screen == CODE_MAKER_SCREEN){
             view.printCodeMakerView();
@@ -133,7 +140,8 @@ public class GameController {
                 gameMode = PLAYER_VS_CPU;
                 screen = CODE_BREAKER_SCREEN;
                 //Todo: Initialize Players? (P1, CPU)
-                model.getBoard().defineRandomSecretCode();
+                //model.getBoard().defineRandomSecretCode();
+                model.getBoard().defineManualSecretCode("WWWWW"); //Temp Code
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
                 gameMode = PLAYER_VS_PLAYER;

@@ -8,16 +8,6 @@ import org.example.model.constants.Colors;
 import static org.example.model.constants.SetUp.NUM_OF_TRIES;
 
 public class GameView {
-    private final String ANSI_RESET = "\u001B[0m";
-    private final String ANSI_BLACK = "\u001B[30m";
-    private final String ANSI_RED = "\u001B[31m";
-    private final String ANSI_GREEN = "\u001B[32m";
-    private final String ANSI_YELLOW = "\u001B[33m";
-    private final String ANSI_BLUE = "\u001B[34m";
-    private final String ANSI_PURPLE = "\u001B[35m";
-    private final String ANSI_CYAN = "\u001B[36m";
-    private final String ANSI_WHITE = "\u001B[37m";
-    private final String ASCII_BOX = "█";
     private final String WHITE_BOX = "\u001B[37m"+"█"+"\u001B[0m";
     private final String BLUE_BOX = "\u001B[34m"+"█"+"\u001B[0m";
     private final String RED_BOX = "\u001B[31m"+"█"+"\u001B[0m";
@@ -53,23 +43,7 @@ public class GameView {
         //Set WhiteSpace
         output.append(" ");
         //Set code cells
-        for(int i=0; i<5; i++){
-            if(row.getColor(i) == Colors.WHITE){
-               output.append("[" + WHITE_BOX + "]");
-            }
-            if(row.getColor(i) == Colors.RED){
-                output.append("[" + RED_BOX + "]");
-            }
-            if(row.getColor(i) == Colors.BLUE){
-                output.append("[" + BLUE_BOX + "]");
-            }
-            if(row.getColor(i) == Colors.GREEN){
-                output.append("[" + GREEN_BOX + "]");
-            }
-            if(row.getColor(i) == Colors.YELLOW){
-                output.append("[" + YELLOW_BOX + "]");
-            }
-        }
+        output.append(appendSecretCode(row));
         //Set WhiteSpace
         output.append(" ");
         int redClues =0;
@@ -112,10 +86,19 @@ public class GameView {
     }
 
     public void printSecretCodeResolved(Row secretCode){
+        String output = "CODE RESOLVED! => " +
+                appendSecretCode(secretCode);
+        System.out.println(output);
+    }
+
+    public void printCodeNotResolved(Row secretCode) {
+        String output = "CODE NOT RESOLVED! => " +
+                appendSecretCode(secretCode);
+        System.out.println(output);
+    }
+
+    private StringBuilder appendSecretCode(Row secretCode){
         StringBuilder output = new StringBuilder();
-
-        output.append("CODE RESOLVED! => ");
-
         for(int i=0;i<secretCode.getCodeLength(); i++){
             if(secretCode.getColor(i) == Colors.WHITE){
                 output.append("[" + WHITE_BOX + "]");
@@ -133,6 +116,6 @@ public class GameView {
                 output.append("[" + YELLOW_BOX + "]");
             }
         }
-        System.out.println(output);
+        return output;
     }
 }
