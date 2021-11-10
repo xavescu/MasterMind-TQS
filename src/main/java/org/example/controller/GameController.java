@@ -93,6 +93,8 @@ public class GameController {
                     resolved = false;
                 }
             }
+        }else{
+            resolved = false;
         }
         return resolved;
     }
@@ -155,10 +157,15 @@ public class GameController {
             }
         }
         if(this.screen == CODE_BREAKER_SCREEN){
-            if(isValidCodeProposal(input)){
-                processCodeProposal(input); //Add a new try row with the colors
-                addCluesToRow(getRowsCount()-1);//Add the clues for that row
+            if(!isCodeResolved()){
+                if(isValidCodeProposal(input)){
+                    processCodeProposal(input); //Add a new try row with the colors
+                    addCluesToRow(getRowsCount()-1);//Add the clues for that row
+                }
+            }else{
+                screen = CODE_MAKER_SCREEN;
             }
+
         }
     }
 
