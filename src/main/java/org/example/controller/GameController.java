@@ -157,7 +157,7 @@ public class GameController {
             }
         }
         if(this.screen == CODE_BREAKER_SCREEN){
-            if(!isCodeResolved()){
+            if(!isCodeResolved()&&!isAllAttemptsDone()){
                 if(isValidCodeProposal(input)){
                     processCodeProposal(input); //Add a new try row with the colors
                     addCluesToRow(getRowsCount()-1);//Add the clues for that row
