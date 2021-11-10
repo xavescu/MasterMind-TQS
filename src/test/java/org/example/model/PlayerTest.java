@@ -14,7 +14,7 @@ public class PlayerTest {
     @Test
     public void givenCodeMakerPlayerWhenChangeRoleThenRoleIsCodeBreaker(){
         //given
-        Player player = new Player(CODE_MAKER);
+        Player player = new Player(CODE_MAKER, true);
 
         //when
         player.changeRole();
@@ -30,7 +30,7 @@ public class PlayerTest {
     @Test
     public void givenCodeBreakerPlayerWhenChangeRoleThenRoleIsCodeMaker(){
         //given
-        Player player = new Player(CODE_BREAKER);
+        Player player = new Player(CODE_BREAKER, true);
 
         //when
         player.changeRole();
@@ -46,7 +46,7 @@ public class PlayerTest {
     @Test
     public void givenNewPlayerWhenAdding5PointsThenHave5TotalPoints(){
         //given
-        Player player = new Player(CODE_BREAKER);
+        Player player = new Player(CODE_BREAKER, true);
 
         //when
         player.addPoints(5);
@@ -62,7 +62,7 @@ public class PlayerTest {
     @Test
     public void givenPlayerWith5PointsWhenAdding3PointsThenHave8TotalPoints(){
         //given
-        Player player = new Player(CODE_BREAKER);
+        Player player = new Player(CODE_BREAKER,true);
         player.addPoints(5);
 
         //when
@@ -79,7 +79,7 @@ public class PlayerTest {
     @Test
     public void givenPlayerWith8PointsWhenAdding4PointsThenHave12TotalPoints(){
         //given
-        Player player = new Player(CODE_BREAKER);
+        Player player = new Player(CODE_BREAKER, true);
         player.addPoints(8);
 
         //when

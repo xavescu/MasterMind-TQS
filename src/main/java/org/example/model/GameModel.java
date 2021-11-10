@@ -4,8 +4,8 @@ import org.example.model.constants.Roles;
 
 public class GameModel {
     private Board board = new Board();
-    private Player player1 = new Player(Roles.CODE_BREAKER);
-    private Player player2 = new Player(Roles.CODE_MAKER);
+    private Player player1 = new Player(Roles.CODE_BREAKER,true);
+    private Player player2 = new Player(Roles.CODE_MAKER,true);
 
     public Board getBoard() {
         return board;
