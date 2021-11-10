@@ -74,7 +74,8 @@ public class GameView {
     }
 
     public void printCodeMakerView(){
-        System.out.println("Define your code");
+        System.out.println(WHITE_BOX+"(W),"+BLUE_BOX+"(B),"+RED_BOX+"(R),"+GREEN_BOX+"(G),"+YELLOW_BOX+"(Y)");
+        System.out.println("Define your code:");
     }
 
     public void printByeByeView(){

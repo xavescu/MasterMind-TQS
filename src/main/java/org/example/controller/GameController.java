@@ -120,10 +120,10 @@ public class GameController {
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             view.printPlayersPoints();
-            if(isCodeResolved()){//SecretCode is breaked
-                view.printSecretCodeResolved(getSecretCode());//print secret code
+            if(isCodeResolved()){
+                view.printSecretCodeResolved(getSecretCode());
             }
-            view.printCodeBreakerView(model.getBoard()); //Todo: Avoid the hardcoding approach, use the actual data from the board
+            view.printCodeBreakerView(model.getBoard());
             if(!isCodeResolved()&&isAllAttemptsDone()){
                 view.printCodeNotResolved(getSecretCode());
             }
@@ -168,7 +168,6 @@ public class GameController {
         }
         if(this.screen == CODE_MAKER_SCREEN){
             if(isValidCodeProposal(input)){
-                System.out.println("VALID CODE");
                 //Add new secret code to board
                 model.getBoard().defineManualSecretCode(input);
                 //CleanUp the old rows attempts
