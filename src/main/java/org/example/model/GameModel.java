@@ -11,6 +11,10 @@ public class GameModel {
         return board;
     }
 
+    public void cleanUpRows(){
+        board.cleanUpRows();
+    }
+
     public void addRow(Row row){
         board.addRow(row);
     }

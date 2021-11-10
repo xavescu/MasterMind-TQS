@@ -165,7 +165,17 @@ public class GameController {
             }else{
                 screen = CODE_MAKER_SCREEN;
             }
-
+        }
+        if(this.screen == CODE_MAKER_SCREEN){
+            if(isValidCodeProposal(input)){
+                System.out.println("VALID CODE");
+                //Add new secret code to board
+                model.getBoard().defineManualSecretCode(input);
+                //CleanUp the old rows attempts
+                model.cleanUpRows();
+                //Move to code BreakerScreen
+                screen = CODE_BREAKER_SCREEN; //But now the CPU will do it
+            }
         }
     }
 

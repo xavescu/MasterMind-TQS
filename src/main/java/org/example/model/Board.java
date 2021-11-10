@@ -14,6 +14,10 @@ public class Board {
         return rows.get(row);
     }
 
+    public void cleanUpRows(){
+        rows = new ArrayList<>();
+    }
+
     public void addRow(Row row){
         this.rows.add(row);
     }
