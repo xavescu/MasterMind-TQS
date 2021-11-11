@@ -275,6 +275,10 @@ public class GameController {
         return model.getBoard();
     }
 
+    public void addPointsToPlayers(){
+
+    }
+
     private static void clearConsole(){
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
