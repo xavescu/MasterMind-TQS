@@ -14,6 +14,7 @@ import java.util.Scanner;
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
+import static org.example.model.constants.Roles.CODE_BREAKER;
 
 // Game loop
 //while(controller.isPlaying()){
@@ -276,7 +277,22 @@ public class GameController {
     }
 
     public void addPointsToPlayers(){
+        if(model.getPlayer1().getRole() == CODE_BREAKER){
+            if(isCodeResolved()){
+                model.getPlayer1().addPoints(10);
+                model.getPlayer2().addPoints(getRowsCount());
+            } else {
+                model.getPlayer2().addPoints(11);
+            }
 
+        } else {
+            if(isCodeResolved()){
+                model.getPlayer2().addPoints(10);
+                model.getPlayer1().addPoints(getRowsCount());
+            } else {
+                model.getPlayer1().addPoints(11);
+            }
+        }
     }
 
     public int getPlayerPoints(int id){
