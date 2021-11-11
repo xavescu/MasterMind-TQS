@@ -141,15 +141,16 @@ public class GameController {
             if(Objects.equals(input, "1")){ //Start 1 player mode
                 gameMode = PLAYER_VS_CPU;
                 screen = CODE_BREAKER_SCREEN;
-                //Todo: Initialize Players? (P1, CPU)
+                model.getPlayer1().setHuman(true);
+                model.getPlayer2().setHuman(false);
                 //model.getBoard().defineRandomSecretCode();
                 model.getBoard().defineManualSecretCode("WWWWW"); //Temp Code
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
                 gameMode = PLAYER_VS_PLAYER;
                 screen = CODE_MAKER_SCREEN;
-                //Todo: Initialize Players? (P1, P2)
-                //Todo: Logic of the CODE_MAKER
+                model.getPlayer1().setHuman(true);
+                model.getPlayer2().setHuman(true);
             }
             if(Objects.equals(input, "3")){ //End game
                 screen = BYEBYE_SCREEN;
