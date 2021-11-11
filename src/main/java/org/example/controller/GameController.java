@@ -279,6 +279,17 @@ public class GameController {
 
     }
 
+    public int getPlayerPoints(int id){
+        int points = 0;
+        if(id == 1){
+            points = model.getPlayer1().getPoints();
+        }
+        if(id == 2) {
+            points =model.getPlayer2().getPoints();
+        }
+        return points;
+    }
+
     private static void clearConsole(){
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }

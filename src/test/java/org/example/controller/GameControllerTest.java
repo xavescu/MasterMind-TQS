@@ -450,4 +450,99 @@ public class GameControllerTest {
         //then
         Assert.assertTrue(controller.isCodeResolved());
     }
+
+    @Test
+    public void addPointsToPlayers_AddThe10PointsToTheCodeBreakerPlayer(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //1P vs CPU mode
+        //P1 wins -> 0+10 0 10
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("RRRRR");
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "RRRRR";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        controller.addPointsToPlayers();
+
+        //then
+        Assert.assertEquals("Player points are add by 10 because he won",10,controller.getPlayerPoints(1));
+    }
+
+    //Todo: Find a way to test this properly
+    @Test
+    public void addPointsToPlayers_AddTheRowsAttemptsPointsToTheCodeMakerPlayer(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //1P vs CPU mode
+        //P1 wins -> 0+10 0 10
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("WWWWW");
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "RRRRR";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        for(int i=0; i<5;i++){
+            System.setIn(in);
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        codeProposalInput = "WWWWW";
+        in = new ByteArrayInputStream(codeProposalInput.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //when
+        controller.addPointsToPlayers();
+
+        //then
+        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt",6,controller.getPlayerPoints(1));
+    }
+
+    //Todo: Find a way to test this properly
+    @Test
+    public void addPointsToPlayers_AddThe11PointsToTheCodeMakerPlayer(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        //1P vs CPU mode
+        //P1 wins -> 0+10 0 10
+        //Go to 1P GameMode
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Force the SecretCode
+        controller.getBoard().defineManualSecretCode("WWWWW");
+        //Enter a CodeProposal that has no color match in any position
+        String codeProposalInput = "RRRRR";
+        //Fail 10 times
+        for(int i=0; i<10;i++){
+            in = new ByteArrayInputStream(codeProposalInput.getBytes());
+            System.setIn(in);
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //when
+        controller.addPointsToPlayers();
+
+        //then
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(2));
+    }
 }
