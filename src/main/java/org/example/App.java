@@ -4,6 +4,9 @@ import org.example.controller.GameController;
 import org.example.model.GameModel;
 import org.example.view.GameView;
 
+import static org.example.controller.constants.Screens.BYEBYE_SCREEN;
+import static org.example.controller.constants.Screens.GAME_OVER_SCREEN;
+
 public class App
 {
     public static void main( String[] args )
@@ -14,7 +17,9 @@ public class App
 
         while(controller.isPlaying()){
             controller.updateView();
-            controller.getKeyBoardInput();
+            if(controller.getScreen()!=GAME_OVER_SCREEN && controller.getScreen()!=BYEBYE_SCREEN){
+                controller.getKeyBoardInput();
+            }
             controller.processGame();
         }
     }

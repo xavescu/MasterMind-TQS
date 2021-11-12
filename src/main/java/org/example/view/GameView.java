@@ -129,4 +129,8 @@ public class GameView {
         }
         return output;
     }
+
+    public void printGameOverView() {
+        System.out.println("GAME OVER!! WELL PLAYED! :D");
+    }
 }

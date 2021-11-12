@@ -50,7 +50,7 @@ import static org.example.model.constants.Roles.CODE_MAKER;
 public class GameController {
     private GameModel model;
     private GameView view;
-    private int turn = 0;
+    private int round = 0;
     private int screen = 0;
     private String input = "";
     private boolean play = true;
@@ -73,8 +73,8 @@ public class GameController {
         return gameMode;
     }
 
-    public int getTurn() {
-        return turn;
+    public int getRound() {
+        return round;
     }
 
     public Row getSecretCode(){
@@ -136,6 +136,11 @@ public class GameController {
         }
         if(this.screen == BYEBYE_SCREEN){
             view.printByeByeView();
+            this.play = false;
+        }
+        if(this.screen == GAME_OVER_SCREEN){
+            view.printGameOverView();
+            this.play = false;
         }
     }
 
@@ -146,8 +151,7 @@ public class GameController {
                 screen = CODE_BREAKER_SCREEN;
                 model.getPlayer1().setHuman(true);
                 model.getPlayer2().setHuman(false);
-                //model.getBoard().defineRandomSecretCode();
-                model.getBoard().defineManualSecretCode("WWWWW"); //Temp Code
+                model.getBoard().defineRandomSecretCode();
             }
             if(Objects.equals(input, "2")){ //Start 2 players mode
                 gameMode = PLAYER_VS_PLAYER;
@@ -157,7 +161,6 @@ public class GameController {
             }
             if(Objects.equals(input, "3")){ //End game
                 screen = BYEBYE_SCREEN;
-                this.play = false;
             }
         }
         if(this.screen == CODE_BREAKER_SCREEN){
@@ -168,7 +171,13 @@ public class GameController {
                 }
             }else{
                 changePlayersRoles();
-                screen = CODE_MAKER_SCREEN;
+                round++;
+                if(round == 4){
+                    //END OF GAME
+                    screen = GAME_OVER_SCREEN;
+                } else {
+                    screen = CODE_MAKER_SCREEN;
+                }
             }
         }
         if(this.screen == CODE_MAKER_SCREEN){
