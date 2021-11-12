@@ -120,7 +120,8 @@ public class GameController {
             view.printWelcomeView();
         }
         if(this.screen == CODE_BREAKER_SCREEN){
-            view.printPlayersPoints(model.getPlayer1().getPoints(),model.getPlayer2().getPoints());
+            addPointsToPlayers();
+            view.printPlayersPoints(getPlayerPoints(1),getPlayerPoints(2));
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
             }
@@ -282,14 +283,18 @@ public class GameController {
                 model.getPlayer1().addPoints(10);
                 model.getPlayer2().addPoints(getRowsCount());
             } else {
-                model.getPlayer2().addPoints(11);
+                if(getRowsCount()==10){
+                    model.getPlayer2().addPoints(11);
+                }
             }
         } else {
             if(isCodeResolved()){
                 model.getPlayer2().addPoints(10);
                 model.getPlayer1().addPoints(getRowsCount());
             } else {
-                model.getPlayer1().addPoints(11);
+                if(getRowsCount()==10){
+                    model.getPlayer1().addPoints(11);
+                }
             }
         }
     }
