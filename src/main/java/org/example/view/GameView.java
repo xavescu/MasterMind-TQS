@@ -130,7 +130,15 @@ public class GameView {
         return output;
     }
 
-    public void printGameOverView() {
-        System.out.println("GAME OVER!! WELL PLAYED! :D");
+    public void printGameOverView(int winnerID) {
+        if(winnerID==0) {
+            System.out.println("GAME OVER!! TIE! NOBODY WINS!");
+        }
+        if(winnerID==1){
+            System.out.println("GAME OVER!! PLAYER 1 is the WINNER!");
+        }
+        if(winnerID==2){
+            System.out.println("GAME OVER!! PLAYER 2 is the WINNER!");
+        }
     }
 }

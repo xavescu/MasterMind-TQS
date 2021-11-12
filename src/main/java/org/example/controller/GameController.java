@@ -139,7 +139,7 @@ public class GameController {
             this.play = false;
         }
         if(this.screen == GAME_OVER_SCREEN){
-            view.printGameOverView();
+            view.printGameOverView(getWinnerPlayerID());
             this.play = false;
         }
     }
@@ -342,6 +342,20 @@ public class GameController {
             id = 1;
         } else {
             id = 2;
+        }
+        return id;
+    }
+
+    public int getWinnerPlayerID(){
+        int id=0;
+        if(model.getPlayer1().getPoints()>model.getPlayer2().getPoints()){
+            id = 1;
+        }
+        if(model.getPlayer1().getPoints()<model.getPlayer2().getPoints()){
+            id = 2;
+        }
+        if(model.getPlayer1().getPoints()==model.getPlayer2().getPoints()){
+            id = 0;
         }
         return id;
     }
