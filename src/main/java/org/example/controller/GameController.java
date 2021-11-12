@@ -120,7 +120,7 @@ public class GameController {
             view.printWelcomeView();
         }
         if(this.screen == CODE_BREAKER_SCREEN){
-            view.printPlayersPoints();
+            view.printPlayersPoints(model.getPlayer1().getPoints(),model.getPlayer2().getPoints());
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
             }
@@ -284,7 +284,6 @@ public class GameController {
             } else {
                 model.getPlayer2().addPoints(11);
             }
-
         } else {
             if(isCodeResolved()){
                 model.getPlayer2().addPoints(10);

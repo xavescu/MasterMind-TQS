@@ -82,8 +82,8 @@ public class GameView {
         System.out.println("Bye bye! :)");
     }
 
-    public void printPlayersPoints(){
-        System.out.println("Player 1: 0pts       Player 2: 0pts");
+    public void printPlayersPoints(int p1Points, int p2Points){
+        System.out.println("Player 1: "+p1Points+"pts       Player 2: "+p2Points+"pts");
     }
 
     public void printSecretCodeResolved(Row secretCode){
