@@ -14,6 +14,8 @@ import java.io.InputStream;
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
+import static org.example.model.constants.Roles.CODE_BREAKER;
+import static org.example.model.constants.Roles.CODE_MAKER;
 
 public class GameControllerTest {
 
@@ -544,5 +546,19 @@ public class GameControllerTest {
 
         //then
         Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(2));
+    }
+
+    @Test
+    public void changePlayersRoles(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+
+        //when
+        controller.changePlayersRoles();
+
+        //then
+        Assert.assertEquals(model.getPlayer1().getRole(), CODE_MAKER);
+        Assert.assertEquals(model.getPlayer2().getRole(), CODE_BREAKER);
     }
 }

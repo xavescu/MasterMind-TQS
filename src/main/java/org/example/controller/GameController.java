@@ -124,10 +124,12 @@ public class GameController {
             view.printPlayersPoints(getPlayerPoints(1),getPlayerPoints(2));
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
+                changePlayersRoles();
             }
             view.printCodeBreakerView(model.getBoard());
             if(!isCodeResolved()&&isAllAttemptsDone()){
                 view.printCodeNotResolved(getSecretCode());
+                changePlayersRoles();
             }
         }
         if(this.screen == CODE_MAKER_SCREEN){
@@ -308,6 +310,11 @@ public class GameController {
             points =model.getPlayer2().getPoints();
         }
         return points;
+    }
+
+    public void changePlayersRoles(){
+        model.getPlayer1().changeRole();
+        model.getPlayer2().changeRole();
     }
 
     private static void clearConsole(){
