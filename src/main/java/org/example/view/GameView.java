@@ -24,7 +24,12 @@ public class GameView {
         System.out.println("3) Exit");
     }
 
-    public void printCodeBreakerView(Board board){
+    public void printCodeBreakerView(int codeBreakerID, Board board){
+        if(codeBreakerID==1){
+            System.out.println("* PLAYER 1 is the CODE_BREAKER *");
+        } else {
+            System.out.println("* PLAYER 2 is the CODE_BREAKER *");
+        }
         for(int i=NUM_OF_TRIES; i>=1; i--){ //i = NUM_OF_TRIES..1
             if(board.getRowsCount()>=i){
                 System.out.println(printCodeBreakerView_Row(board.getRow(i-1), i-1));
@@ -73,7 +78,12 @@ public class GameView {
         return output.toString();
     }
 
-    public void printCodeMakerView(){
+    public void printCodeMakerView(int codeMakerID){
+        if(codeMakerID==1){
+            System.out.println("* PLAYER 1 is the CODE_MAKER *");
+        } else {
+            System.out.println("* PLAYER 2 is the CODE_MAKER *");
+        }
         System.out.println(WHITE_BOX+"(W),"+BLUE_BOX+"(B),"+RED_BOX+"(R),"+GREEN_BOX+"(G),"+YELLOW_BOX+"(Y)");
         System.out.println("Define your code:");
     }

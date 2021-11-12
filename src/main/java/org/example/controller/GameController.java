@@ -15,6 +15,7 @@ import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
 import static org.example.model.constants.Roles.CODE_BREAKER;
+import static org.example.model.constants.Roles.CODE_MAKER;
 
 // Game loop
 //while(controller.isPlaying()){
@@ -124,16 +125,14 @@ public class GameController {
             view.printPlayersPoints(getPlayerPoints(1),getPlayerPoints(2));
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
-                changePlayersRoles();
             }
-            view.printCodeBreakerView(model.getBoard());
+            view.printCodeBreakerView(getCodeBreakerID(),model.getBoard());
             if(!isCodeResolved()&&isAllAttemptsDone()){
                 view.printCodeNotResolved(getSecretCode());
-                changePlayersRoles();
             }
         }
         if(this.screen == CODE_MAKER_SCREEN){
-            view.printCodeMakerView();
+            view.printCodeMakerView(getCodeMakerID());
         }
         if(this.screen == BYEBYE_SCREEN){
             view.printByeByeView();
@@ -168,6 +167,7 @@ public class GameController {
                     addCluesToRow(getRowsCount()-1);//Add the clues for that row
                 }
             }else{
+                changePlayersRoles();
                 screen = CODE_MAKER_SCREEN;
             }
         }
@@ -315,6 +315,26 @@ public class GameController {
     public void changePlayersRoles(){
         model.getPlayer1().changeRole();
         model.getPlayer2().changeRole();
+    }
+
+    public int getCodeBreakerID(){
+        int id;
+        if(model.getPlayer1().getRole()==CODE_BREAKER){
+            id = 1;
+        } else {
+            id = 2;
+        }
+        return id;
+    }
+
+    public int getCodeMakerID(){
+        int id;
+        if(model.getPlayer1().getRole()==CODE_MAKER){
+            id = 1;
+        } else {
+            id = 2;
+        }
+        return id;
     }
 
     private static void clearConsole(){
