@@ -45,7 +45,7 @@ public class GameControllerTest {
 
     }
 
-    //Todo: check the propper way to validate the end of the game via UnitTest
+    //Todo: check the proper way to validate the end of the game via UnitTest
     @Test
     public void isPlaying_GameEndsProperly() {
         //given
