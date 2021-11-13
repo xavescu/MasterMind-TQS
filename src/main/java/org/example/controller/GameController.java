@@ -73,10 +73,6 @@ public class GameController {
         return gameMode;
     }
 
-    public int getRound() {
-        return round;
-    }
-
     public Row getSecretCode(){
         return model.getSecretCode();
     }
