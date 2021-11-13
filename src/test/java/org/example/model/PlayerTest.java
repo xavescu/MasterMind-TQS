@@ -88,4 +88,35 @@ public class PlayerTest {
         //then
         Assert.assertEquals(12, player.getPoints());
     }
+
+    /**
+     * UnitTest
+     */
+    @Test
+    public void isHuman_returnTheExpectedValue(){
+        //given
+        Player player = new Player(CODE_MAKER,true);
+
+        //when
+
+        //then
+        Assert.assertTrue(player.isHuman());
+
+    }
+
+    /**
+     * UnitTest
+     */
+    @Test
+    public void setHuman_setTheExpectedValue(){
+        //given
+        Player player = new Player(CODE_MAKER,true);
+
+        //when
+        player.setHuman(false);
+
+        //then
+        Assert.assertFalse(player.isHuman());
+
+    }
 }
