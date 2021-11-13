@@ -30,10 +30,6 @@ public class Board {
         return secretCode;
     }
 
-    public void defineSecretCode(ArrayList<Integer> code){
-        secretCode.setCode(code);
-    }
-
     public void defineRandomSecretCode(){
         ArrayList<Integer> secretCode = new ArrayList<>();
         for(int i=0; i<5; i++){
