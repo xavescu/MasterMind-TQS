@@ -615,4 +615,45 @@ public class GameControllerTest {
         //then
         Assert.assertFalse(controller.isCodeMakerCPU());
     }
+
+    @Test
+    public void getWinnerPlayerID_Player1Wins(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+
+        //when
+        model.getPlayer1().addPoints(10);
+
+        //then
+        Assert.assertEquals(1,controller.getWinnerPlayerID());
+
+    }
+
+    @Test
+    public void getWinnerPlayerID_Player2Wins(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+
+        //when
+        model.getPlayer2().addPoints(10);
+
+        //then
+        Assert.assertEquals(2,controller.getWinnerPlayerID());
+    }
+
+    @Test
+    public void getWinnerPlayerID_TieNobodyWins(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+
+        //when
+        model.getPlayer1().addPoints(10);
+        model.getPlayer2().addPoints(10);
+
+        //then
+        Assert.assertEquals(0,controller.getWinnerPlayerID());
+    }
 }

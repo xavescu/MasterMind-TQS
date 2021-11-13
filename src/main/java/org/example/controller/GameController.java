@@ -45,7 +45,6 @@ import static org.example.model.constants.Roles.CODE_MAKER;
 //Update View
 //If round = 4 -> displayView[Game_Over]
 //Close App
-//}
 
 public class GameController {
     private GameModel model;
