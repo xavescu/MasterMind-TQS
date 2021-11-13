@@ -336,6 +336,12 @@ public class GameController {
         return id;
     }
 
+    public boolean isCodeBreakerCPU(){
+        boolean isCPU = false;
+
+        return isCPU;
+    }
+
     public int getCodeMakerID(){
         int id;
         if(model.getPlayer1().getRole()==CODE_MAKER){
@@ -344,6 +350,12 @@ public class GameController {
             id = 2;
         }
         return id;
+    }
+
+    public boolean isCodeMakerCPU(){
+        boolean isCPU = false;
+
+        return isCPU;
     }
 
     public int getWinnerPlayerID(){
