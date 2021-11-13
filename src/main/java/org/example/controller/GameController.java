@@ -338,7 +338,12 @@ public class GameController {
 
     public boolean isCodeBreakerCPU(){
         boolean isCPU = false;
-
+        if(getCodeBreakerID()==1){
+            isCPU = !model.getPlayer1().isHuman();
+        }
+        if(getCodeBreakerID()==2){
+            isCPU = !model.getPlayer2().isHuman();
+        }
         return isCPU;
     }
 
@@ -354,7 +359,12 @@ public class GameController {
 
     public boolean isCodeMakerCPU(){
         boolean isCPU = false;
-
+        if(getCodeMakerID()==1){
+            isCPU = !model.getPlayer1().isHuman();
+        }
+        if(getCodeMakerID()==2){
+            isCPU = !model.getPlayer2().isHuman();
+        }
         return isCPU;
     }
 

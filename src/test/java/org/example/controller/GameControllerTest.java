@@ -595,7 +595,7 @@ public class GameControllerTest {
         //Player 2 -> CODE_MAKER - CPU
 
         //then
-        Assert.assertTrue(controller.isCodeBreakerCPU());
+        Assert.assertTrue(controller.isCodeMakerCPU());
     }
 
     @Test
@@ -613,6 +613,6 @@ public class GameControllerTest {
         //Player 2 -> CODE_MAKER - HUM
 
         //then
-        Assert.assertFalse(controller.isCodeBreakerCPU());
+        Assert.assertFalse(controller.isCodeMakerCPU());
     }
 }
