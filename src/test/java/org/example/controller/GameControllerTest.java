@@ -561,4 +561,58 @@ public class GameControllerTest {
         Assert.assertEquals(model.getPlayer1().getRole(), CODE_MAKER);
         Assert.assertEquals(model.getPlayer2().getRole(), CODE_BREAKER);
     }
+
+    @Test
+    public void isCodeBreakerCPU_ValidateIsHUM(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+
+        //when
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - CPU
+
+        //then
+        Assert.assertFalse(controller.isCodeBreakerCPU());
+    }
+
+    @Test
+    public void isCodeMakerCPU_ValidateIsCPU(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+
+        //when
+        String select1PGameMode = "1";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - CPU
+
+        //then
+        Assert.assertTrue(controller.isCodeBreakerCPU());
+    }
+
+    @Test
+    public void isCodeMakerCPU_ValidateIsHUM(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+
+        //when
+        String select1PGameMode = "2";
+        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
+        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - HUM
+
+        //then
+        Assert.assertFalse(controller.isCodeBreakerCPU());
+    }
 }
