@@ -88,6 +88,7 @@ public class GameController {
             for(int i=0; i<5;i++){
                 if(getSecretCode().getColor(i)!=getRow(getRowsCount()-1).getColor(i)){
                     resolved = false;
+                    break;
                 }
             }
         }else{
