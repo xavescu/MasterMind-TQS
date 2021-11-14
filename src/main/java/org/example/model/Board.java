@@ -39,23 +39,23 @@ public class Board {
         this.secretCode.setCode(secretCode);
     }
 
-    public void defineManualSecretCode(String manuealSecretCode){
+    public void defineManualSecretCode(String manualSecretCode){
         ArrayList<Integer> newSecretCode = new ArrayList<>();
 
         for(int i=0; i<5; i++){
-            if(manuealSecretCode.charAt(i) == ('W')){
+            if(manualSecretCode.charAt(i) == ('W')){
                 newSecretCode.add(Colors.WHITE);
             }
-            if(manuealSecretCode.charAt(i) == ('G')){
+            if(manualSecretCode.charAt(i) == ('G')){
                 newSecretCode.add(Colors.GREEN);
             }
-            if(manuealSecretCode.charAt(i) == ('B')){
+            if(manualSecretCode.charAt(i) == ('B')){
                 newSecretCode.add(Colors.BLUE);
             }
-            if(manuealSecretCode.charAt(i) == ('R')){
+            if(manualSecretCode.charAt(i) == ('R')){
                 newSecretCode.add(Colors.RED);
             }
-            if(manuealSecretCode.charAt(i) == ('Y')){
+            if(manualSecretCode.charAt(i) == ('Y')){
                 newSecretCode.add(Colors.YELLOW);
             }
         }
