@@ -374,14 +374,12 @@ public class GameController {
 
     public int getWinnerPlayerID(){
         int id=0;
-        if(model.getPlayer1().getPoints()>model.getPlayer2().getPoints()){
-            id = 1;
-        }
-        if(model.getPlayer1().getPoints()<model.getPlayer2().getPoints()){
-            id = 2;
-        }
-        if(model.getPlayer1().getPoints()==model.getPlayer2().getPoints()){
-            id = 0;
+        if(!(model.getPlayer1().getPoints()==model.getPlayer2().getPoints())){
+            if(model.getPlayer1().getPoints()>model.getPlayer2().getPoints()){
+                id = 1;
+            } else {
+                id = 2;
+            }
         }
         return id;
     }
