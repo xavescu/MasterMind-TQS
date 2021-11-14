@@ -478,7 +478,33 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isCodeMakerCPU_ValidateIsCPU(){
+    public void isCodeMakerCPU_ValidatePlayer1Path_False(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+        systemInMock.provideLines("1", "WWWWW");
+
+        //when
+        // select Mode 1 HUMvsCPU
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - CPU
+        // we force the secret code
+        model.getBoard().defineManualSecretCode("WWWWW");
+        //finish round
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_MAKER - HUM
+        //Player 2 -> CODE_BREAKER - CPU
+        //Todo: BUG-2: We keep a waiting input from the user when the code is already solved or we spend the 10 tries.
+
+        //then
+        Assert.assertFalse(controller.isCodeMakerCPU());
+    }
+
+    @Test
+    public void isCodeMakerCPU_ValidatePlayer2Path_True(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("1");
@@ -494,7 +520,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isCodeMakerCPU_ValidateIsHUM(){
+    public void isCodeMakerCPU_ValidatePlayer2Path_False(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("2");
