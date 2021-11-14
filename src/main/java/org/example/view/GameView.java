@@ -108,6 +108,18 @@ public class GameView {
         System.out.println(output);
     }
 
+    public void printGameOverView(int winnerID) {
+        if(winnerID==0) {
+            System.out.println("GAME OVER!! TIE! NOBODY WINS!");
+        }
+        if(winnerID==1){
+            System.out.println("GAME OVER!! PLAYER 1 is the WINNER!");
+        }
+        if(winnerID==2){
+            System.out.println("GAME OVER!! PLAYER 2 is the WINNER!");
+        }
+    }
+
     private StringBuilder appendSecretCode(Row secretCode){
         StringBuilder output = new StringBuilder();
         for(int i=0;i<secretCode.getCodeLength(); i++){
@@ -128,17 +140,5 @@ public class GameView {
             }
         }
         return output;
-    }
-
-    public void printGameOverView(int winnerID) {
-        if(winnerID==0) {
-            System.out.println("GAME OVER!! TIE! NOBODY WINS!");
-        }
-        if(winnerID==1){
-            System.out.println("GAME OVER!! PLAYER 1 is the WINNER!");
-        }
-        if(winnerID==2){
-            System.out.println("GAME OVER!! PLAYER 2 is the WINNER!");
-        }
     }
 }
