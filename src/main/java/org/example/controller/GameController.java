@@ -110,7 +110,7 @@ public class GameController {
 
     public void updateView(){
         //Clear app console
-        clearConsole();
+        view.clearConsole();
 
         if(this.screen == WELCOME_SCREEN){
             view.printWelcomeView();
@@ -134,7 +134,15 @@ public class GameController {
             this.play = false;
         }
         if(this.screen == GAME_OVER_SCREEN){
-            view.printGameOverView(getWinnerPlayerID());
+            if(getWinnerPlayerID()==0){
+                view.printTieNobodyWinsView();
+            }
+            if(getWinnerPlayerID()==1){
+                view.printPlayer1WinsView();
+            }
+            if(getWinnerPlayerID()==2){
+                view.printPlayer2WinsView();
+            }
             this.play = false;
         }
     }
@@ -375,9 +383,5 @@ public class GameController {
             id = 0;
         }
         return id;
-    }
-
-    private static void clearConsole(){
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 }
