@@ -235,20 +235,22 @@ public class GameController {
         ArrayList<Integer> codeProposal = new ArrayList<>();
         Row row = new Row();
         for(int i=0; i<5; i++){
-            if(input.charAt(i) == ('W')){
-                codeProposal.add(Colors.WHITE);
-            }
-            if(input.charAt(i) == ('G')){
-                codeProposal.add(Colors.GREEN);
-            }
-            if(input.charAt(i) == ('B')){
-                codeProposal.add(Colors.BLUE);
-            }
-            if(input.charAt(i) == ('R')){
-                codeProposal.add(Colors.RED);
-            }
-            if(input.charAt(i) == ('Y')){
-                codeProposal.add(Colors.YELLOW);
+            switch (input.charAt(i)){
+                case 'W':
+                    codeProposal.add(Colors.WHITE);
+                    break;
+                case 'G':
+                    codeProposal.add(Colors.GREEN);
+                    break;
+                case 'B':
+                    codeProposal.add(Colors.BLUE);
+                    break;
+                case 'Y':
+                    codeProposal.add(Colors.YELLOW);
+                    break;
+                case 'R':
+                    codeProposal.add(Colors.RED);
+                    break;
             }
         }
         row.setCode(codeProposal);
