@@ -109,6 +109,7 @@ public class GameController {
         return getBoard().getRowsCount();
     }
 
+    //Todo: pending validate view functions are call
     public void updateView(){
         //Clear app console
         view.clearConsole();
