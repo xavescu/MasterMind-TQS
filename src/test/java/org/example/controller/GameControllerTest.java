@@ -395,7 +395,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void addPointsToPlayers_AddThe10PointsToTheCodeBreakerPlayer(){
+    public void addPointsToPlayers_AddThe10PointsToTheCodeBreakerPlayer1(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("2","RRRRR","RRRRR");
@@ -408,28 +408,43 @@ public class GameControllerTest {
 
         //then
         Assert.assertEquals("Player points are add by 10 because he won when it was CODE_BREAKER",10,controller.getPlayerPoints(controller.getCodeMakerID()));
+        Assert.assertEquals("Player points are add by 1 because the code was discovered on the 6th attempt whe it was CODE_MAKER",1,controller.getPlayerPoints(controller.getCodeBreakerID()));
     }
 
-    //Todo: Find a way to test this properly
     @Test
-    public void addPointsToPlayers_AddTheRowsAttemptsPointsToTheCodeMakerPlayer(){
+    public void addPointsToPlayers_AddThe10PointsToTheCodeBreakerPlayer2(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        systemInMock.provideLines("2","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","WWWWW");
+        systemInMock.provideLines("2","RRRRR","RRRRR","WWWWW","WWWWW");
+        for(int i=0; i<5;i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
 
         //when
-        for(int i=0; i<8;i++){
+
+        //then
+        Assert.assertEquals("Player points are add by 10 because he won when it was CODE_BREAKER (+1 from the first round)",11,controller.getPlayerPoints(controller.getCodeMakerID()));
+        Assert.assertEquals("Player points are add by 1 because the code was discovered on the 6th attempt whe it was CODE_MAKER (+10 from the first round)",11,controller.getPlayerPoints(controller.getCodeBreakerID()));
+    }
+
+    @Test
+    public void addPointsToPlayers_AddThe11PointsToTheCodeMakerPlayer1(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","WWWWW","WWWWW","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR");
+
+        for(int i=0; i<14;i++){
             controller.getKeyBoardInput();
             controller.processGame();
         }
 
         //then
-        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt whe it was CODE_MAKER",6,controller.getPlayerPoints(controller.getCodeBreakerID()));
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 21 (10 1st round + 11)",21,controller.getPlayerPoints(controller.getCodeBreakerID()));
     }
 
-    //Todo: Find a way to test this properly
     @Test
-    public void addPointsToPlayers_AddThe11PointsToTheCodeMakerPlayer(){
+    public void addPointsToPlayers_AddThe11PointsToTheCodeMakerPlayer2(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("2","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR");
@@ -439,10 +454,41 @@ public class GameControllerTest {
             controller.processGame();
         }
         //when
-        controller.addPointsToPlayers();
 
         //then
-        Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(controller.getCodeMakerID()));
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(controller.getCodeBreakerID()));
+    }
+
+    @Test
+    public void addPointsToPlayers_DoNothingBreakerPlayer1(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","WWWWW","RRRRR");
+
+        for(int i=0; i<3;i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //when
+
+        //then
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 0 because he still playing",0,controller.getPlayerPoints(controller.getCodeBreakerID()));
+    }
+
+    @Test
+    public void addPointsToPlayers_DoNothingBreakerPlayer2(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","WWWWW","WWWWW","RRRRR","BBBBB");
+
+        for(int i=0; i<5;i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //when
+
+        //then
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 0 because he still playing (stills with one from the 1st round)",1,controller.getPlayerPoints(controller.getCodeBreakerID()));
     }
 
     @Test
