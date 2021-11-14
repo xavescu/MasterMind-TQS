@@ -405,10 +405,9 @@ public class GameControllerTest {
         }
 
         //when
-        controller.addPointsToPlayers();
 
         //then
-        Assert.assertEquals("Player points are add by 10 because he won",10,controller.getPlayerPoints(controller.getCodeBreakerID()));
+        Assert.assertEquals("Player points are add by 10 because he won when it was CODE_BREAKER",10,controller.getPlayerPoints(controller.getCodeMakerID()));
     }
 
     //Todo: Find a way to test this properly
@@ -417,16 +416,15 @@ public class GameControllerTest {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("2","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","WWWWW");
+
+        //when
         for(int i=0; i<8;i++){
             controller.getKeyBoardInput();
             controller.processGame();
         }
 
-        //when
-        controller.addPointsToPlayers();
-
         //then
-        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt",6,controller.getPlayerPoints(controller.getCodeMakerID()));
+        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt whe it was CODE_MAKER",6,controller.getPlayerPoints(controller.getCodeBreakerID()));
     }
 
     //Todo: Find a way to test this properly

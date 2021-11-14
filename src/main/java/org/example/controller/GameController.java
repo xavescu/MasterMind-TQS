@@ -117,7 +117,6 @@ public class GameController {
             view.printWelcomeView();
         }
         if(this.screen == CODE_BREAKER_SCREEN){
-            addPointsToPlayers();
             view.printPlayersPoints(getPlayerPoints(1),getPlayerPoints(2));
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
@@ -148,50 +147,74 @@ public class GameController {
         }
     }
 
+    //Todo: refactor code to a switch case to decrease the complexity
     public void processGame(){
-        if(this.screen == WELCOME_SCREEN){
-            if(Objects.equals(input, "1")){ //Start 1 player mode
-                gameMode = PLAYER_VS_CPU;
-                screen = CODE_BREAKER_SCREEN;
-                model.getPlayer1().setHuman(true);
-                model.getPlayer2().setHuman(false);
-                model.getBoard().defineRandomSecretCode();
-            }
-            if(Objects.equals(input, "2")){ //Start 2 players mode
-                gameMode = PLAYER_VS_PLAYER;
-                screen = CODE_MAKER_SCREEN;
-                model.getPlayer1().setHuman(true);
-                model.getPlayer2().setHuman(true);
-            }
-            if(Objects.equals(input, "3")){ //End game
-                screen = BYEBYE_SCREEN;
-            }
-        }
-        if(this.screen == CODE_BREAKER_SCREEN){
-            if(!isCodeResolved()&&!isAllAttemptsDone()){
-                if(isValidCodeProposal(input)){
-                    processCodeProposal(input); //Add a new try row with the colors
-                    addCluesToRow(getRowsCount()-1);//Add the clues for that row
+        for(int i=0; i<1; i++){ //Fix for BUG-2: Force execute just one
+            if(this.screen == WELCOME_SCREEN){
+                if(Objects.equals(input, "1")){ //Start 1 player mode
+                    gameMode = PLAYER_VS_CPU;
+                    screen = CODE_BREAKER_SCREEN;
+                    model.getPlayer1().setHuman(true);
+                    model.getPlayer2().setHuman(false);
+                    model.getBoard().defineRandomSecretCode();
+                    break;
                 }
-            }else{
-                changePlayersRoles();
-                round++;
-                if(round == 4){
-                    //END OF GAME
-                    screen = GAME_OVER_SCREEN;
-                } else {
+                if(Objects.equals(input, "2")){ //Start 2 players mode
+                    gameMode = PLAYER_VS_PLAYER;
                     screen = CODE_MAKER_SCREEN;
+                    model.getPlayer1().setHuman(true);
+                    model.getPlayer2().setHuman(true);
+                    break;
+                }
+                if(Objects.equals(input, "3")){ //End game
+                    screen = BYEBYE_SCREEN;
+                    break;
                 }
             }
-        }
-        if(this.screen == CODE_MAKER_SCREEN){
-            if(isValidCodeProposal(input)){
-                //Add new secret code to board
-                model.getBoard().defineManualSecretCode(input);
-                //CleanUp the old rows attempts
-                model.cleanUpRows();
-                //Move to code BreakerScreen
-                screen = CODE_BREAKER_SCREEN; //But now the CPU will do it
+            if(this.screen == CODE_BREAKER_SCREEN){
+                if(!isCodeResolved()&&!isAllAttemptsDone()){
+                    if(isValidCodeProposal(input)){
+                        processCodeProposal(input); //Add a new try row with the colors
+                        addCluesToRow(getRowsCount()-1);//Add the clues for that row
+                    }
+                }
+                if(isCodeResolved()){
+                    addPointsToPlayers();
+                    changePlayersRoles();
+                    round++;
+                    if(round == 4){
+                        //END OF GAME
+                        screen = GAME_OVER_SCREEN;
+                    } else {
+                        screen = CODE_MAKER_SCREEN;
+                    }
+                    break;
+                }else{
+                    if(isAllAttemptsDone()){
+                        addPointsToPlayers();
+                        changePlayersRoles();
+                        round++;
+                        if(round == 4){
+                            //END OF GAME
+                            screen = GAME_OVER_SCREEN;
+                            break;
+                        } else {
+                            screen = CODE_MAKER_SCREEN;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(this.screen == CODE_MAKER_SCREEN){
+                if(isValidCodeProposal(input)){
+                    //Add new secret code to board
+                    model.getBoard().defineManualSecretCode(input);
+                    //CleanUp the old rows attempts
+                    model.cleanUpRows();
+                    //Move to code BreakerScreen
+                    screen = CODE_BREAKER_SCREEN; //But now the CPU will do it
+                    break;
+                }
             }
         }
     }
