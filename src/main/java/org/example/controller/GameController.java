@@ -102,11 +102,11 @@ public class GameController {
     }
 
     public Row getRow(int i){
-        return model.getBoard().getRow(i);
+        return getBoard().getRow(i);
     }
 
     public int getRowsCount(){
-        return model.getBoard().getRowsCount();
+        return getBoard().getRowsCount();
     }
 
     public void updateView(){
@@ -121,7 +121,7 @@ public class GameController {
             if(isCodeResolved()){
                 view.printSecretCodeResolved(getSecretCode());
             }
-            view.printCodeBreakerView(getCodeBreakerID(),model.getBoard());
+            view.printCodeBreakerView(getCodeBreakerID(),getBoard());
             if(!isCodeResolved()&&isAllAttemptsDone()){
                 view.printCodeNotResolved(getSecretCode());
             }
@@ -156,7 +156,7 @@ public class GameController {
                     screen = CODE_BREAKER_SCREEN;
                     model.getPlayer1().setHuman(true);
                     model.getPlayer2().setHuman(false);
-                    model.getBoard().defineRandomSecretCode();
+                    getBoard().defineRandomSecretCode();
                     break;
                 }
                 if(Objects.equals(input, "2")){ //Start 2 players mode
@@ -208,7 +208,7 @@ public class GameController {
             if(this.screen == CODE_MAKER_SCREEN){
                 if(isValidCodeProposal(input)){
                     //Add new secret code to board
-                    model.getBoard().defineManualSecretCode(input);
+                    getBoard().defineManualSecretCode(input);
                     //CleanUp the old rows attempts
                     model.cleanUpRows();
                     //Move to code BreakerScreen
@@ -281,34 +281,34 @@ public class GameController {
     }
 
     public int getRedCluesCount(int rowNum){
-        int redCluesCount = 0;
-        Row row = model.getBoard().getRow(rowNum);
+        int cluesCount = 0;
+        Row row = getBoard().getRow(rowNum);
         for(int i=0; i<row.getClues().size(); i++){
             if(row.getClues().get(i).equals(Clues.EXACT_POSITION)){
-                redCluesCount++;
+                cluesCount++;
             }
         }
-        return redCluesCount;
+        return cluesCount;
     }
     public int getWhiteCluesCount(int rowNum){
-        int redCluesCount = 0;
-        Row row = model.getBoard().getRow(rowNum);
+        int cluesCount = 0;
+        Row row = getBoard().getRow(rowNum);
         for(int i=0; i<row.getClues().size(); i++){
             if(row.getClues().get(i).equals(Clues.WRONG_POSITION)){
-                redCluesCount++;
+                cluesCount++;
             }
         }
-        return redCluesCount;
+        return cluesCount;
     }
     public int getVoidCluesCount(int rowNum){
-        int redCluesCount = 0;
-        Row row = model.getBoard().getRow(rowNum);
+        int cluesCount = 0;
+        Row row = getBoard().getRow(rowNum);
         for(int i=0; i<row.getClues().size(); i++){
             if(row.getClues().get(i).equals(Clues.NO_CLUE)){
-                redCluesCount++;
+                cluesCount++;
             }
         }
-        return redCluesCount;
+        return cluesCount;
     }
 
     public Board getBoard(){
