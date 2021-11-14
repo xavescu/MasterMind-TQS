@@ -3,19 +3,15 @@ package org.example.controller;
 import org.example.model.GameModel;
 import org.example.model.constants.Colors;
 import org.example.view.GameView;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import org.junit.*;
+import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
 import static org.example.model.constants.Roles.CODE_BREAKER;
 import static org.example.model.constants.Roles.CODE_MAKER;
+import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 public class GameControllerTest {
 
@@ -27,14 +23,14 @@ public class GameControllerTest {
     public void tearDown() throws Exception {
     }
 
+    @Rule
+    public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Test
     public void isPlaying_GameStartsProperly(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -50,9 +46,7 @@ public class GameControllerTest {
     public void isPlaying_GameEndsProperly() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "3";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -66,9 +60,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_Screen_givenScreen0And1InputThenScreenIsCodeBreaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -82,9 +74,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_Screen_givenScreen0AndInvalidInputThenScreenIsWelcome() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "sadaf!";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("sadaf!");
 
         //when
         controller.getKeyBoardInput();
@@ -98,9 +88,8 @@ public class GameControllerTest {
     public void getKeyBoardInput_Screen_givenScreen0And2InputThenScreenIsCodeMaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "2";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2");
+
 
         //when
         controller.getKeyBoardInput();
@@ -114,9 +103,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_Screen_givenScreen0And3InputThenScreenIsByeBye() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "3";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("3");
 
         //when
         controller.getKeyBoardInput();
@@ -130,9 +117,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_GameMode_givenScreen0And1InputThenGameModeIsPvCPU() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -146,9 +131,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_GameMode_givenScreen0AndInvalidInputThenGameModeIs0() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "sadaf!";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("sadaf!");
 
         //when
         controller.getKeyBoardInput();
@@ -162,9 +145,7 @@ public class GameControllerTest {
     public void getKeyBoardInput_GameMode_givenScreen0And2InputThenGameModeIsPvsP() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "2";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2");
 
         //when
         controller.getKeyBoardInput();
@@ -178,9 +159,7 @@ public class GameControllerTest {
     public void CPUInitializeCode_CPU_SecretCodeIsNotNull() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -194,9 +173,7 @@ public class GameControllerTest {
     public void CPUInitializeCode_CPU_SecretCodeHasTheExpectedLength() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
@@ -211,9 +188,7 @@ public class GameControllerTest {
     public void CPUInitializeCode_CPU_SecretCodeHasValidIntegersValues() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("1");
         String secretCodeValues = "";
 
         //when
@@ -257,121 +232,72 @@ public class GameControllerTest {
     public void isValidCode_ValidInput_EACH_COLOR() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RBWGY";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        String codeProposal = "RBWGY";
 
         //then
-        Assert.assertTrue(controller.isValidCodeProposal(codeProposalInput));
+        Assert.assertTrue(controller.isValidCodeProposal(codeProposal));
     }
 
     @Test
     public void isValidCode_InvalidInput_EACH_COLOR_LOWERCASE() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "rbwgy";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        String codeProposal = "rbwgy";
 
         //then
-        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposal));
     }
 
     @Test
     public void isValidCode_InvalidInput_LONG_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RBWGWW";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        String codeProposal = "RBWGWW";
 
         //then
-        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposal));
     }
 
     @Test
     public void isValidCode_InvalidInput_SHORT_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RBW";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        String codeProposal = "RBW";
 
         //then
-        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposal));
     }
 
     @Test
     public void isValidCode_InvalidInput_WRONG_CHARACTERS() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RfW!W";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        String codeProposal = "RfW!W";
 
         //then
-        Assert.assertFalse(controller.isValidCodeProposal(codeProposalInput));
+        Assert.assertFalse(controller.isValidCodeProposal(codeProposal));
     }
 
     @Test
     public void processCodeProposal_ExpectedColorsAreSet() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RBWGY";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        systemInMock.provideLines("1","RBWGY");
+
 
         //when
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
         controller.getKeyBoardInput();
         controller.processGame();
 
@@ -388,20 +314,16 @@ public class GameControllerTest {
         //given
         int rowNumber = 0;
         GameController controller = new GameController(new GameView(), new GameModel());
-        String input = "1";
-        String codeProposalInput = "RBWGY";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2","RBBYG","RBWGY");
         controller.getKeyBoardInput();
         controller.processGame();
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
+        controller.getKeyBoardInput();
+        controller.processGame();
         controller.getKeyBoardInput();
         controller.processGame();
 
         //when
-        controller.getBoard().defineManualSecretCode("RBBYG"); //Todo: refactor this code
-        controller.addCluesToRow(rowNumber); //Secret Code = RBBYG
+        controller.addCluesToRow(rowNumber);
 
         //then
         Assert.assertEquals("Assert RedClues are fine:",2, controller.getRedCluesCount(0));
@@ -416,18 +338,14 @@ public class GameControllerTest {
     @Test
     public void bug1_GivenASecretCodeWhenEnterAProposalWithoutAnyColorMatchThenTheAppExplodes() {
         GameController controller = new GameController(new GameView(), new GameModel());
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2","RRRRR","BBBBB");
+        //Go to 2P GameMode
         controller.getKeyBoardInput();
         controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("RRRRR"); //Todo: refactor this code
+        //Define the SecretCode
+        controller.getKeyBoardInput();
+        controller.processGame();
         //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "BBBBB";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
         controller.getKeyBoardInput();
         controller.processGame();
         //All must be good
@@ -438,21 +356,16 @@ public class GameControllerTest {
     public void isCodeResolved_CodeIsNotResolved() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2","RRRRR","BBBBB");
+        //Go to 2P GameMode
         controller.getKeyBoardInput();
         controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("RRRRR");
-        //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "BBBBB";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
+        //Enter the SecretCode
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //when
+        controller.getKeyBoardInput();
         controller.processGame();
 
 
@@ -465,21 +378,16 @@ public class GameControllerTest {
     public void isCodeResolved_CodeIsResolved() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
+        systemInMock.provideLines("2","RRRRR","RRRRR");
+        //Go to 2P GameMode
         controller.getKeyBoardInput();
         controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("RRRRR");
-        //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "RRRRR";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
+        //Enter the SecretCode
         controller.getKeyBoardInput();
+        controller.processGame();
 
         //when
+        controller.getKeyBoardInput();
         controller.processGame();
 
         //then
@@ -490,28 +398,17 @@ public class GameControllerTest {
     public void addPointsToPlayers_AddThe10PointsToTheCodeBreakerPlayer(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        //1P vs CPU mode
-        //P1 wins -> 0+10 0 10
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("RRRRR");
-        //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "RRRRR";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
+        systemInMock.provideLines("2","RRRRR","RRRRR");
+        for(int i=0; i<3;i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
 
         //when
         controller.addPointsToPlayers();
 
         //then
-        Assert.assertEquals("Player points are add by 10 because he won",10,controller.getPlayerPoints(1));
+        Assert.assertEquals("Player points are add by 10 because he won",10,controller.getPlayerPoints(controller.getCodeBreakerID()));
     }
 
     //Todo: Find a way to test this properly
@@ -519,35 +416,17 @@ public class GameControllerTest {
     public void addPointsToPlayers_AddTheRowsAttemptsPointsToTheCodeMakerPlayer(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        //1P vs CPU mode
-        //P1 wins -> 0+10 0 10
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("WWWWW");
-        //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "RRRRR";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        for(int i=0; i<5;i++){
-            System.setIn(in);
+        systemInMock.provideLines("2","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","WWWWW");
+        for(int i=0; i<8;i++){
             controller.getKeyBoardInput();
             controller.processGame();
         }
-        codeProposalInput = "WWWWW";
-        in = new ByteArrayInputStream(codeProposalInput.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
         controller.addPointsToPlayers();
 
         //then
-        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt",6,controller.getPlayerPoints(1));
+        Assert.assertEquals("Player points are add by 6 because the code was discovered on the 6th attempt",6,controller.getPlayerPoints(controller.getCodeMakerID()));
     }
 
     //Todo: Find a way to test this properly
@@ -555,22 +434,9 @@ public class GameControllerTest {
     public void addPointsToPlayers_AddThe11PointsToTheCodeMakerPlayer(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        //1P vs CPU mode
-        //P1 wins -> 0+10 0 10
-        //Go to 1P GameMode
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
-        controller.getKeyBoardInput();
-        controller.processGame();
-        //Force the SecretCode
-        controller.getBoard().defineManualSecretCode("WWWWW");
-        //Enter a CodeProposal that has no color match in any position
-        String codeProposalInput = "RRRRR";
-        //Fail 10 times
-        for(int i=0; i<10;i++){
-            in = new ByteArrayInputStream(codeProposalInput.getBytes());
-            System.setIn(in);
+        systemInMock.provideLines("2","WWWWW","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR","RRRRR");
+
+        for(int i=0; i<12;i++){
             controller.getKeyBoardInput();
             controller.processGame();
         }
@@ -578,7 +444,7 @@ public class GameControllerTest {
         controller.addPointsToPlayers();
 
         //then
-        Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(2));
+        Assert.assertEquals("Player(CODE_MAKER) points are increase by 11 because he won",11,controller.getPlayerPoints(controller.getCodeMakerID()));
     }
 
     @Test
@@ -599,11 +465,9 @@ public class GameControllerTest {
     public void isCodeBreakerCPU_ValidateIsHUM(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("1");
 
         //when
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
         controller.getKeyBoardInput();
         controller.processGame();
         //PLayer 1 -> CODE_BREAKER - HUM
@@ -617,11 +481,9 @@ public class GameControllerTest {
     public void isCodeMakerCPU_ValidateIsCPU(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("1");
 
         //when
-        String select1PGameMode = "1";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
         controller.getKeyBoardInput();
         controller.processGame();
         //PLayer 1 -> CODE_BREAKER - HUM
@@ -635,11 +497,9 @@ public class GameControllerTest {
     public void isCodeMakerCPU_ValidateIsHUM(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2");
 
         //when
-        String select1PGameMode = "2";
-        InputStream in = new ByteArrayInputStream(select1PGameMode.getBytes());
-        System.setIn(in);
         controller.getKeyBoardInput();
         controller.processGame();
         //PLayer 1 -> CODE_BREAKER - HUM
