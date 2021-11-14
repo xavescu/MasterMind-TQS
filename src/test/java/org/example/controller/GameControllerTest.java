@@ -450,6 +450,9 @@ public class GameControllerTest {
         //given
         GameModel model = new GameModel();
         GameController controller = new GameController(new GameView(), model);
+        //The state when we initialize the controller is:
+        //Player1 -> CODE_BREAKER
+        //Player2 -> CODE_MAKER
 
         //when
         controller.changePlayersRoles();
@@ -460,16 +463,66 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isCodeBreakerCPU_ValidateIsHUM(){
+    public void isCodeBreakerCPU_ValidatePlayer1Path_False(){
         //given
-        GameController controller = new GameController(new GameView(), new GameModel());
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
         systemInMock.provideLines("1");
+
+        //when
+        // select Mode 1 HUMvsCPU
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - CPU
+
+        //then
+        Assert.assertFalse(controller.isCodeBreakerCPU());
+    }
+
+    @Test
+    public void isCodeBreakerCPU_ValidatePlayer2Path_True(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+        systemInMock.provideLines("1","WWWWW");
 
         //when
         controller.getKeyBoardInput();
         controller.processGame();
         //PLayer 1 -> CODE_BREAKER - HUM
         //Player 2 -> CODE_MAKER - CPU
+        //Force manual secret code
+        model.getBoard().defineManualSecretCode("WWWWW");
+        //Finish round + changes roles
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_MAKER - HUM
+        //Player 2 -> CODE_BREAKER - CPU
+
+        //then
+        Assert.assertTrue(controller.isCodeBreakerCPU());
+    }
+
+    @Test
+    public void isCodeBreakerCPU_ValidatePlayer2Path_False(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2", "WWWWW", "WWWWW");
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_BREAKER - HUM
+        //Player 2 -> CODE_MAKER - HUM
+        //Player2 define secret code
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //Finish round + changes roles
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //PLayer 1 -> CODE_MAKER - HUM
+        //Player 2 -> CODE_BREAKER - HUM
 
         //then
         Assert.assertFalse(controller.isCodeBreakerCPU());

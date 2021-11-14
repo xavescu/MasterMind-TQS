@@ -341,8 +341,7 @@ public class GameController {
         int points = 0;
         if(id == 1){
             points = model.getPlayer1().getPoints();
-        }
-        if(id == 2) {
+        } else {
             points =model.getPlayer2().getPoints();
         }
         return points;
