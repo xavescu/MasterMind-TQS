@@ -495,7 +495,6 @@ public class GameControllerTest {
         controller.processGame();
         //PLayer 1 -> CODE_MAKER - HUM
         //Player 2 -> CODE_BREAKER - CPU
-        //Todo: BUG-2: We keep a waiting input from the user when the code is already solved or we spend the 10 tries.
 
         //then
         Assert.assertFalse(controller.isCodeMakerCPU());
