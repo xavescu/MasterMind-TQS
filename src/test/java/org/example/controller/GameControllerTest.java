@@ -229,7 +229,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_ValidInput_EACH_COLOR() {
+    public void isValidCodeProposal_ValidInput_EACH_COLOR() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
 
@@ -241,7 +241,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_InvalidInput_EACH_COLOR_LOWERCASE() {
+    public void isValidCodeProposal_InvalidInput_EACH_COLOR_LOWERCASE() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
 
@@ -253,7 +253,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_InvalidInput_LONG_ANSWER() {
+    public void isValidCodeProposal_InvalidInput_LONG_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
 
@@ -265,7 +265,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_InvalidInput_SHORT_ANSWER() {
+    public void isValidCodeProposal_InvalidInput_SHORT_ANSWER() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
 
@@ -277,7 +277,7 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isValidCode_InvalidInput_WRONG_CHARACTERS() {
+    public void isValidCodeProposal_InvalidInput_WRONG_CHARACTERS() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
 
