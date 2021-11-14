@@ -229,6 +229,38 @@ public class GameControllerTest {
     }
 
     @Test
+    public void getRowsCount_NoRows(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("1");
+
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(0, controller.getRowsCount());
+    }
+
+    @Test
+    public void getRowsCount_SomeRows(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2", "WWWWW", "RRRRR");
+
+
+        //when
+        for(int i=0; i<3; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+
+        //then
+        Assert.assertEquals(1, controller.getRowsCount());
+    }
+
+    @Test
     public void isValidCodeProposal_ValidInput_EACH_COLOR() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
