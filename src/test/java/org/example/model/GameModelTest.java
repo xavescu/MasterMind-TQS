@@ -99,41 +99,16 @@ public class GameModelTest {
     }
 
     @Test
-    public void getBestScore_Name(){
-        //given
-        GameModel model = new GameModel();
-        String name;
-
-        //when
-        name = model.getBestScore_Name();
-
-        //then
-        assertSame("Elon Musk", name);
-    }
-
-    @Test
-    public void getBestScore_Score(){
-        //given
-        GameModel model = new GameModel();
-        String score;
-
-        //when
-        score = model.getBestScore_Score();
-
-        //then
-        assertSame("20", score);
-    }
-
-    @Test
-    public void setBestScore_NameAndScore(){
+    public void setBestScoreNameAndScore_getNameAndScore_HappyPath(){
         //given
         GameModel model = new GameModel();
 
         //when
         model.setBestScore_NameAndScore("Phill","10");
+        int score = Integer.parseInt(model.getBestScore_Score());
 
         //then
-        assertSame("Phill", model.getBestScore_Name());
-        assertSame("10", model.getBestScore_Score());
+        Assert.assertEquals("Phill", model.getBestScore_Name());
+        Assert.assertEquals(10, score);
     }
 }
