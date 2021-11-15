@@ -31,7 +31,7 @@ public class GameModelTest {
      * UnitTest
      */
     @Test
-    public void getBoard_cleanUpRows() {
+    public void getBoard_addRow_cleanUpRows() {
         //given
         GameModel model = new GameModel();
         model.addRow(new Row());
