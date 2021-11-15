@@ -354,17 +354,6 @@ public class GameController {
         return id;
     }
 
-    public boolean isCodeBreakerCPU(){
-        boolean isCPU = false;
-        if(getCodeBreakerID()==1){
-            isCPU = !model.getPlayer1().isHuman();
-        }
-        if(getCodeBreakerID()==2){
-            isCPU = !model.getPlayer2().isHuman();
-        }
-        return isCPU;
-    }
-
     public int getCodeMakerID(){
         int id;
         if(model.getPlayer1().getRole()==CODE_MAKER){
