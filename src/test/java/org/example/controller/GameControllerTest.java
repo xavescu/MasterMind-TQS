@@ -326,12 +326,11 @@ public class GameControllerTest {
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("1","RBWGY");
 
-
         //when
-        controller.getKeyBoardInput();
-        controller.processGame();
-        controller.getKeyBoardInput();
-        controller.processGame();
+        for(int i=0; i<2; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
 
         //then
         Assert.assertEquals(Colors.RED, controller.getRow(0).getColor(0));
@@ -347,20 +346,34 @@ public class GameControllerTest {
         int rowNumber = 0;
         GameController controller = new GameController(new GameView(), new GameModel());
         systemInMock.provideLines("2","RBBYG","RBWGY");
-        controller.getKeyBoardInput();
-        controller.processGame();
-        controller.getKeyBoardInput();
-        controller.processGame();
-        controller.getKeyBoardInput();
-        controller.processGame();
 
         //when
-        controller.addCluesToRow(rowNumber);
+        for(int i=0; i<3; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
 
         //then
         Assert.assertEquals("Assert RedClues are fine:",2, controller.getRedCluesCount(0));
         Assert.assertEquals("Assert WhiteClues are fine:",2, controller.getWhiteCluesCount(0));
         Assert.assertEquals("Assert NoClues are fine:",1, controller.getVoidCluesCount(0));
+    }
+
+    @Test
+    public void addCluesToRow_NoVoidCluesAreAdd() {
+        //given
+        int rowNumber = 0;
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","RBBYG","RBBGY");
+
+        //when
+        for(int i=0; i<3; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+
+        //then
+        Assert.assertEquals("Assert NoClues are fine:",0, controller.getVoidCluesCount(0));
     }
 
     /**
