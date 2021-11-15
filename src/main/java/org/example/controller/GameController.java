@@ -262,6 +262,12 @@ public class GameController {
         Row secretCode = model.getSecretCode();
         Row row = getRow(rowNumber);
         ArrayList<Integer> clues = new ArrayList<>();
+        clues = addRedAndWhiteClues(clues, row, secretCode);
+        clues = addVoidClues(clues, row, secretCode);
+        row.setClues(clues);
+    }
+
+    public ArrayList<Integer> addRedAndWhiteClues(ArrayList<Integer> clues, Row row, Row secretCode){
         for(int i=0; i<row.getCodeLength(); i++){
             if(secretCode.getColor(i)==row.getColor(i)){
                 clues.add(Clues.EXACT_POSITION);
@@ -274,13 +280,17 @@ public class GameController {
                 }
             }
         }
+        return clues;
+    }
+
+    public ArrayList<Integer> addVoidClues(ArrayList<Integer> clues, Row row, Row secretCode){
         if(clues.size()!=5){
             int tempCluesSize = 5-clues.size();
             for(int i=0; i<tempCluesSize;i++){
                 clues.add(Clues.NO_CLUE);
             }
         }
-        row.setClues(clues);
+        return clues;
     }
 
     public int getRedCluesCount(int rowNum){
