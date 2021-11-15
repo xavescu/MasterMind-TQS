@@ -86,7 +86,7 @@ public class GameController {
         view.clearConsole();
 
         if(this.screen == WELCOME_SCREEN){
-            view.printWelcomeView();
+            view.printWelcomeView(model.getBestScore_Name(), model.getBestScore_Score());
         }
         if(this.screen == CODE_BREAKER_SCREEN){
             view.printPlayersPoints(getPlayerPoints(1),getPlayerPoints(2));
@@ -117,6 +117,9 @@ public class GameController {
             }
             this.play = false;
         }
+        if(this.screen == UPDATE_HIGH_SCORE_CREEN){
+            view.printUpdateHighScoreScreen();
+        }
     }
 
     public void processGame(){
@@ -127,7 +130,7 @@ public class GameController {
                     screen = CODE_BREAKER_SCREEN;
                     model.getPlayer1().setHuman(true);
                     model.getPlayer2().setHuman(false);
-                    getBoard().defineRandomSecretCode();
+                    getBoard().defineManualSecretCode("WWWWW");
                     break;
                 }
                 if(Objects.equals(input, "2")){ //Start 2 players mode
@@ -169,7 +172,14 @@ public class GameController {
                 }else{
                     if(isAllAttemptsDone()){
                         if(gameMode == PLAYER_VS_CPU){
-                            screen = GAME_OVER_SCREEN;
+                            //validar si es high score
+                            //BUG: how we pass from String to valid integer
+                            if(Integer.parseInt(model.getBestScore_Score()) > getPlayerPoints(getCodeBreakerID())){
+                                screen = UPDATE_HIGH_SCORE_CREEN;
+                                break;
+                            }else{
+                                screen = GAME_OVER_SCREEN;
+                            }
                         } else {
                             addPointsToPlayers();
                             changePlayersRoles();
@@ -195,6 +205,9 @@ public class GameController {
                     screen = CODE_BREAKER_SCREEN; //But now the CPU will do it
                     break;
                 }
+            }
+            if(this.screen == UPDATE_HIGH_SCORE_CREEN){
+                updateHighScore();
             }
         }
     }
@@ -384,5 +397,11 @@ public class GameController {
             }
         }
         return id;
+    }
+
+    public void updateHighScore(){
+        getKeyBoardInput();
+        int points = getPlayerPoints(getCodeBreakerID());
+        model.setBestScore_NameAndScore(input, ""+points);
     }
 }

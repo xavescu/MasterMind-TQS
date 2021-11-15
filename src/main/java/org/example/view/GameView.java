@@ -17,7 +17,9 @@ public class GameView {
     private final String RED_CROSS = "\u001B[31m"+"X"+"\u001B[0m";
 
 
-    public void printWelcomeView(){
+    public void printWelcomeView(String highScoreName, String highScoreScore){
+        System.out.println("HIGH CORE");
+        System.out.println(highScoreName+"("+highScoreScore+")\n");
         System.out.println("<*> MASTERMIND <*>");
         System.out.println("1) 1 Player");
         System.out.println("2) 2 Players");
@@ -140,6 +142,12 @@ public class GameView {
             }
         }
         return output;
+    }
+
+    public void printUpdateHighScoreScreen(){
+        System.out.println("CONGRATULATIONS! YOU ARE THE NEW HIGHSCORE");
+        System.out.println("Please, add your name:");
+
     }
 
     public void clearConsole(){

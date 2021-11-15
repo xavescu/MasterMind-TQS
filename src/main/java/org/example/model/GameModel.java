@@ -42,8 +42,6 @@ public class GameModel {
         Scanner s = null;
 
         try {
-            // Leemos el contenido del fichero
-            System.out.println("... Leemos el contenido del fichero ...");
             s = new Scanner(fichero);
 
             name = s.nextLine(); 	// Guardamos la linea en un String
@@ -70,8 +68,6 @@ public class GameModel {
         Scanner s = null;
 
         try {
-            // Leemos el contenido del fichero
-            System.out.println("... Leemos el contenido del fichero ...");
             s = new Scanner(fichero);
 
             name = s.nextLine();
@@ -92,8 +88,8 @@ public class GameModel {
         return name;
     }
 
-    public void setBestScore_NameAndScore(String[] newHighScore){
-        String[] lineas = newHighScore;
+    public void setBestScore_NameAndScore(String name, String score){
+        String[] lineas = {name, score};
 
         /** FORMA 1 DE ESCRITURA **/
         FileWriter fichero = null;

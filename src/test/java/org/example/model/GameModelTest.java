@@ -128,11 +128,9 @@ public class GameModelTest {
     public void setBestScore_NameAndScore(){
         //given
         GameModel model = new GameModel();
-        String[] newHighScore = {"Phill", "10"};
-
 
         //when
-        model.setBestScore_NameAndScore(newHighScore);
+        model.setBestScore_NameAndScore("Phill","10");
 
         //then
         assertSame("Phill", model.getBestScore_Name());
