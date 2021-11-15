@@ -47,8 +47,8 @@ import static org.example.model.constants.Roles.CODE_MAKER;
 //Close App
 
 public class GameController {
-    private GameModel model;
-    private GameView view;
+    private final GameModel model;
+    private final GameView view;
     private int round = 0;
     private int screen = 0;
     private String input = "";
