@@ -174,7 +174,7 @@ public class GameController {
                         if(gameMode == PLAYER_VS_CPU){
                             //validar si es high score
                             //BUG: how we pass from String to valid integer
-                            if(Integer.parseInt(model.getBestScore_Score()) > getPlayerPoints(getCodeBreakerID())){
+                            if(Integer.parseInt(model.getBestScore_Score()) < getPlayerPoints(getCodeBreakerID())){
                                 screen = UPDATE_HIGH_SCORE_CREEN;
                                 break;
                             }else{
@@ -400,8 +400,8 @@ public class GameController {
     }
 
     public void updateHighScore(){
-        getKeyBoardInput();
         int points = getPlayerPoints(getCodeBreakerID());
         model.setBestScore_NameAndScore(input, ""+points);
+        this.screen = GAME_OVER_SCREEN;
     }
 }
