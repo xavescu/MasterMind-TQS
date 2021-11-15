@@ -263,7 +263,7 @@ public class GameController {
         Row row = getRow(rowNumber);
         ArrayList<Integer> clues = new ArrayList<>();
         clues = addRedAndWhiteClues(clues, row, secretCode);
-        clues = addVoidClues(clues, row, secretCode);
+        clues = addVoidClues(clues);
         row.setClues(clues);
     }
 
@@ -283,7 +283,7 @@ public class GameController {
         return clues;
     }
 
-    public ArrayList<Integer> addVoidClues(ArrayList<Integer> clues, Row row, Row secretCode){
+    public ArrayList<Integer> addVoidClues(ArrayList<Integer> clues){
         if(clues.size()!=5){
             int tempCluesSize = 5-clues.size();
             for(int i=0; i<tempCluesSize;i++){
