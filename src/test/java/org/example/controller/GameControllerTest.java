@@ -131,6 +131,44 @@ public class GameControllerTest {
     }
 
     @Test
+    public void screen_GameOverScreen_isCallAfterAllAttemptsDone_HUMvsCPU(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+        systemInMock.provideLines("1","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW");
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+        model.getBoard().defineManualSecretCode("RRRRR");
+        for(int i=0; i<10; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+
+        //then
+        Assert.assertEquals(GAME_OVER_SCREEN,controller.getScreen());
+    }
+
+    @Test
+    public void validate_weStillCodeBreakerScreen_CodeResolved_HUMvsCPU(){
+        //given
+        GameModel model = new GameModel();
+        GameController controller = new GameController(new GameView(), model);
+        systemInMock.provideLines("1","RRRRR");
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+        model.getBoard().defineManualSecretCode("RRRRR");
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertEquals(CODE_BREAKER_SCREEN,controller.getScreen());
+    }
+
+    @Test
     public void getKeyBoardInput_GameMode_givenScreen0And1InputThenGameModeIsPvCPU() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
