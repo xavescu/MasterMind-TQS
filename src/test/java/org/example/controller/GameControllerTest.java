@@ -385,6 +385,37 @@ public class GameControllerTest {
     }
 
     @Test
+    public void isAllAttemptsDone_False_LessThan10Rows(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("1");
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+
+        //then
+        Assert.assertFalse(controller.isAllAttemptsDone());
+    }
+
+    @Test
+    public void isAllAttemptsDone_True_10Rows(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","RRRRR","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW","WWWWW");
+
+        //when
+        for(int i=0; i<12; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+
+        //then
+        Assert.assertTrue(controller.isAllAttemptsDone());
+    }
+
+    @Test
     public void isCodeResolved_CodeIsNotResolved_NoRow() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
