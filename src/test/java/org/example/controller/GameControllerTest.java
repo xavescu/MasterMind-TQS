@@ -28,6 +28,20 @@ public class GameControllerTest {
     public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Test
+    public void isPlaying_theGameIsInitializeAsExpected() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("1");
+
+        //when
+        controller.getKeyBoardInput();
+        controller.processGame();
+
+        //then
+        Assert.assertTrue(controller.isPlaying());
+    }
+
+    @Test
     public void getKeyBoardInput_Screen_givenScreen0And1InputThenScreenIsCodeBreaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
