@@ -17,35 +17,6 @@ import static org.example.controller.constants.Screens.*;
 import static org.example.model.constants.Roles.CODE_BREAKER;
 import static org.example.model.constants.Roles.CODE_MAKER;
 
-// Game loop
-//while(controller.isPlaying()){
-//We listen the keyboard to change the status of the game
-
-//if first screen -> display view [Choose your game]
-//Cursor for the view?
-//Arrow up/down + Return?
-
-//if P1vsP2 -> display view [P2, Define your code]
-//if P1vsCPU -> display view [Define your proposal]
-
-//while !codeResolved -> display view [Define your proposal]
-//Validate proposal
-//Update View
-
-//If codeResolved -> displayView [CODE_BREAKER wins]
-//Add points to CODE_MAKER
-//Change Players roles
-//Update View
-//If round = 4 -> displayView[Game_Over]
-//Close App
-
-//If moreThan10Turns -> DisplayView [CODE_MAKER wins]
-//Add points to CODE_MAKER
-//Change Players roles
-//Update View
-//If round = 4 -> displayView[Game_Over]
-//Close App
-
 public class GameController {
     private final GameModel model;
     private final GameView view;
@@ -179,27 +150,36 @@ public class GameController {
                     }
                 }
                 if(isCodeResolved()){
-                    addPointsToPlayers();
-                    changePlayersRoles();
-                    round++;
-                    if(round == 4){
-                        //END OF GAME
-                        screen = GAME_OVER_SCREEN;
+                    if(gameMode == PLAYER_VS_CPU){
+                        addPointsToPlayers();
+                        getBoard().defineRandomSecretCode();
+                        model.cleanUpRows();
                     } else {
-                        screen = CODE_MAKER_SCREEN;
-                    }
-                    break;
-                }else{
-                    if(isAllAttemptsDone()){
                         addPointsToPlayers();
                         changePlayersRoles();
                         round++;
                         if(round == 4){
                             //END OF GAME
                             screen = GAME_OVER_SCREEN;
-                            break;
                         } else {
                             screen = CODE_MAKER_SCREEN;
+                        }
+                        break;
+                    }
+                }else{
+                    if(isAllAttemptsDone()){
+                        if(gameMode == PLAYER_VS_CPU){
+                            screen = GAME_OVER_SCREEN;
+                        } else {
+                            addPointsToPlayers();
+                            changePlayersRoles();
+                            round++;
+                            if(round == 4){
+                                //END OF GAME
+                                screen = GAME_OVER_SCREEN;
+                            } else {
+                                screen = CODE_MAKER_SCREEN;
+                            }
                             break;
                         }
                     }
