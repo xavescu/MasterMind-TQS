@@ -130,7 +130,7 @@ public class GameController {
                     screen = CODE_BREAKER_SCREEN;
                     model.getPlayer1().setHuman(true);
                     model.getPlayer2().setHuman(false);
-                    getBoard().defineManualSecretCode("WWWWW");
+                    getBoard().defineRandomSecretCode();
                     break;
                 }
                 if(Objects.equals(input, "2")){ //Start 2 players mode
