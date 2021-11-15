@@ -385,21 +385,32 @@ public class GameControllerTest {
     }
 
     @Test
-    public void isCodeResolved_CodeIsNotResolved() {
+    public void isCodeResolved_CodeIsNotResolved_NoRow() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
-        systemInMock.provideLines("2","RRRRR","BBBBB");
-        //Go to 2P GameMode
-        controller.getKeyBoardInput();
-        controller.processGame();
-        //Enter the SecretCode
-        controller.getKeyBoardInput();
-        controller.processGame();
+        systemInMock.provideLines("1");
 
         //when
         controller.getKeyBoardInput();
         controller.processGame();
 
+
+        //then
+        Assert.assertFalse(controller.isCodeResolved());
+
+    }
+
+    @Test
+    public void isCodeResolved_CodeIsNotResolved_OneRow() {
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+        systemInMock.provideLines("2","RRRRR","BBBBB");
+
+        //when
+        for(int i=0; i<3; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
 
         //then
         Assert.assertFalse(controller.isCodeResolved());
