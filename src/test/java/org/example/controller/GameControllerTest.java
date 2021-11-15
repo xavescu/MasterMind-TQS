@@ -739,4 +739,116 @@ public class GameControllerTest {
         //then
         Assert.assertEquals(0,controller.getWinnerPlayerID());
     }
+
+    @Test
+    public void updateHighScore_UpdateNewScore(){
+        //given
+        GameModel model = new GameModel();
+        String originalName = model.getBestScore_Name();
+        String originalScore = model.getBestScore_Score();
+        GameController controller = new GameController(new GameView(), model);
+        //setejar el nou contingut del file (Dummy(0))
+        model.setBestScore_NameAndScore("Dummy","1");
+        systemInMock.provideLines("1","WWWWW","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","Saitama");
+        //seleccionar 1
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forzar manualment el codi secret ("WWWWW")
+        controller.getBoard().defineManualSecretCode("WWWWW");
+        //encertar
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forçar codi secret
+        controller.getBoard().defineManualSecretCode("RRRRR");
+
+        //when
+        //fallarx10
+        for(int i=0; i<10; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //entrar nom (Saitama)
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //then
+        //validar file té els valors esperat (Saitama(10))
+        Assert.assertEquals("Saitama", model.getBestScore_Name());
+        Assert.assertEquals(10, Integer.parseInt(model.getBestScore_Score()));
+        //tornar a setejar el valor al file
+        model.setBestScore_NameAndScore(originalName,originalScore);
+    }
+    @Test
+    public void updateHighScore_DontUpdateNewScore_Equal(){
+        //given
+        GameModel model = new GameModel();
+        String originalName = model.getBestScore_Name();
+        String originalScore = model.getBestScore_Score();
+        GameController controller = new GameController(new GameView(), model);
+        //setejar el nou contingut del file (Dummy(0))
+        model.setBestScore_NameAndScore("Dummy","10");
+        systemInMock.provideLines("1","WWWWW","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","Saitama");
+        //seleccionar 1
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forzar manualment el codi secret ("WWWWW")
+        controller.getBoard().defineManualSecretCode("WWWWW");
+        //encertar
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forçar codi secret
+        controller.getBoard().defineManualSecretCode("RRRRR");
+
+        //when
+        //fallarx10
+        for(int i=0; i<10; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //entrar nom (Saitama)
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //then
+        //validar file té els valors esperat (Saitama(10))
+        Assert.assertEquals("Dummy", model.getBestScore_Name());
+        Assert.assertEquals(10, Integer.parseInt(model.getBestScore_Score()));
+        //tornar a setejar el valor al file
+        model.setBestScore_NameAndScore(originalName,originalScore);
+    }
+    @Test
+    public void updateHighScore_DontUpdateNewScore_Less(){
+        //given
+        GameModel model = new GameModel();
+        String originalName = model.getBestScore_Name();
+        String originalScore = model.getBestScore_Score();
+        GameController controller = new GameController(new GameView(), model);
+        //setejar el nou contingut del file (Dummy(0))
+        model.setBestScore_NameAndScore("Dummy","100");
+        systemInMock.provideLines("1","WWWWW","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","BBBBB","Saitama");
+        //seleccionar 1
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forzar manualment el codi secret ("WWWWW")
+        controller.getBoard().defineManualSecretCode("WWWWW");
+        //encertar
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //forçar codi secret
+        controller.getBoard().defineManualSecretCode("RRRRR");
+
+        //when
+        //fallarx10
+        for(int i=0; i<10; i++){
+            controller.getKeyBoardInput();
+            controller.processGame();
+        }
+        //entrar nom (Saitama)
+        controller.getKeyBoardInput();
+        controller.processGame();
+        //then
+        //validar file té els valors esperat (Saitama(10))
+        Assert.assertEquals("Dummy", model.getBestScore_Name());
+        Assert.assertEquals(100, Integer.parseInt(model.getBestScore_Score()));
+        //tornar a setejar el valor al file
+        model.setBestScore_NameAndScore(originalName,originalScore);
+    }
 }
