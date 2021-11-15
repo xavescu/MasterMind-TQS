@@ -13,4 +13,5 @@ El jugadors canvien els rols i es juga una nova partida.
 Guanya el jugador amb més punts després de 4 rondes.
 
 # Funcionalitats del projecte 
-El projecte consistirà en una app de consola desenvolupada en Java. La interficie serà del estil ASCII. El joc tindrà possibilitat de jugar 1 jugador contra la PC o 2 jugadors. Per al funcionament de la PC, aquesta sols intentarà colocar valors aleatoris en el codi proposat, si aconsegueix un punt vermell, mirarà de fixar una posició, intentant sempre mantenir el maxim de punts vermells.
+El projecte consisteix en una app de consola desenvolupada en Java. La interfície serà del estil ASCII. El joc tindrà possibilitat de jugar 1 jugador contra la PC o 2 jugadors. Si l’usuari decideix jugar contra la CPU haurà de intentar endevinar tants SecretCodes com sigui possible. Si es capaç d’endevinar el codi en 10 intents se li sumarà la puntuació i un nou codi serà generat. Si gasta els 10 intents, si la seva puntació és la nova millor serà guardada a BD (un JSON) per ser mostrada al inici de la APP.
+En el mode de 2 jugadors es repartiran els rols de CODE_BREAKER i CODE_MAKER. Després de 4 rondes guanyarà el jugador amb major puntuació.
