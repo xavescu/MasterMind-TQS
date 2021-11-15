@@ -9,6 +9,7 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 import static org.example.controller.constants.GameModes.PLAYER_VS_CPU;
 import static org.example.controller.constants.GameModes.PLAYER_VS_PLAYER;
 import static org.example.controller.constants.Screens.*;
+import static org.example.model.constants.Colors.*;
 import static org.example.model.constants.Roles.CODE_BREAKER;
 import static org.example.model.constants.Roles.CODE_MAKER;
 import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
@@ -229,6 +230,23 @@ public class GameControllerTest {
     }
 
     @Test
+    public void processCodeProposal_AllColorsAreSetAsExpected(){
+        //given
+        GameController controller = new GameController(new GameView(), new GameModel());
+
+        //when
+        controller.processCodeProposal("WBYRG");
+
+        //then
+        Assert.assertEquals(WHITE,controller.getRow(0).getColor(0));
+        Assert.assertEquals(BLUE,controller.getRow(0).getColor(1));
+        Assert.assertEquals(YELLOW,controller.getRow(0).getColor(2));
+        Assert.assertEquals(RED,controller.getRow(0).getColor(3));
+        Assert.assertEquals(GREEN,controller.getRow(0).getColor(4));
+
+    }
+
+    @Test
     public void getRowsCount_NoRows(){
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
@@ -335,7 +353,7 @@ public class GameControllerTest {
         //then
         Assert.assertEquals(Colors.RED, controller.getRow(0).getColor(0));
         Assert.assertEquals(Colors.BLUE, controller.getRow(0).getColor(1));
-        Assert.assertEquals(Colors.WHITE, controller.getRow(0).getColor(2));
+        Assert.assertEquals(WHITE, controller.getRow(0).getColor(2));
         Assert.assertEquals(Colors.GREEN, controller.getRow(0).getColor(3));
         Assert.assertEquals(Colors.YELLOW, controller.getRow(0).getColor(4));
     }
