@@ -28,36 +28,6 @@ public class GameControllerTest {
     public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Test
-    public void isPlaying_GameStartsProperly(){
-        //given
-        GameController controller = new GameController(new GameView(), new GameModel());
-        systemInMock.provideLines("1");
-
-        //when
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //then
-        Assert.assertTrue(controller.isPlaying());
-
-    }
-
-    //Todo: check the proper way to validate the end of the game via UnitTest
-    @Test
-    public void isPlaying_GameEndsProperly() {
-        //given
-        GameController controller = new GameController(new GameView(), new GameModel());
-        systemInMock.provideLines("1");
-
-        //when
-        controller.getKeyBoardInput();
-        controller.processGame();
-
-        //then
-        Assert.assertFalse(controller.isPlaying());
-    }
-
-        @Test
     public void getKeyBoardInput_Screen_givenScreen0And1InputThenScreenIsCodeBreaker() {
         //given
         GameController controller = new GameController(new GameView(), new GameModel());
