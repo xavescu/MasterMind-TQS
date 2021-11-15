@@ -97,4 +97,45 @@ public class GameModelTest {
         Assert.assertEquals(CODE_MAKER,model.getPlayer2().getRole());
 
     }
+
+    @Test
+    public void getBestScore_Name(){
+        //given
+        GameModel model = new GameModel();
+        String name;
+
+        //when
+        name = model.getBestScore_Name();
+
+        //then
+        assertSame("Elon Musk", name);
+    }
+
+    @Test
+    public void getBestScore_Score(){
+        //given
+        GameModel model = new GameModel();
+        String score;
+
+        //when
+        score = model.getBestScore_Score();
+
+        //then
+        assertSame("20", score);
+    }
+
+    @Test
+    public void setBestScore_NameAndScore(){
+        //given
+        GameModel model = new GameModel();
+        String[] newHighScore = {"Phill", "10"};
+
+
+        //when
+        model.setBestScore_NameAndScore(newHighScore);
+
+        //then
+        assertSame("Phill", model.getBestScore_Name());
+        assertSame("10", model.getBestScore_Score());
+    }
 }
