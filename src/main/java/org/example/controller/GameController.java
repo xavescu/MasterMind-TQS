@@ -148,7 +148,6 @@ public class GameController {
         }
     }
 
-    //Todo: refactor code to a switch case to decrease the complexity
     public void processGame(){
         for(int i=0; i<1; i++){ //Fix for BUG-2: Force execute just one
             if(this.screen == WELCOME_SCREEN){
